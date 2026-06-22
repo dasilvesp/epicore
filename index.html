@@ -1,0 +1,4840 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Epicore Arquitetura | Arquitetura estratégica para negócios - V3</title>
+  <meta name="description" content="Projetos comerciais, corporativos e promocionais desenvolvidos para transformar marcas em experiências impactantes." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <style>
+    @font-face {
+      font-family: 'Zuume Bold';
+      src: url('./assets/fonts/Zuume-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Area Normal';
+      src: url('./assets/fonts/Area-Normal-Regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Area Normal';
+      src: url('./assets/fonts/Area-Normal-Regular-Italic.otf') format('opentype');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Area Normal';
+      src: url('./assets/fonts/Area-Normal-SemiBold.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Area Normal';
+      src: url('./assets/fonts/Area-Normal-SemiBold-Italic.otf') format('opentype');
+      font-weight: 600;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Area Normal';
+      src: url('./assets/fonts/Area-Normal-ExtraBold.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Area Normal';
+      src: url('./assets/fonts/Area-Normal-ExtraBold-Italic.otf') format('opentype');
+      font-weight: 800;
+      font-style: italic;
+      font-display: swap;
+    }
+
+    :root {
+      --black: #080808;
+      --soft-black: #141414;
+      --white: #ffffff;
+      --off: #f4f1ea;
+      --line: rgba(8, 8, 8, .14);
+      --line-invert: rgba(255, 255, 255, .18);
+      --yellow: #FFD928;
+      --red: #F13A28;
+      --blue: #0870EE;
+      --green: #51C535;
+      --pink: #EC559A;
+      --orange: #ED6C1E;
+      --radius: 28px;
+      --container: min(1420px, calc(100vw - 120px));
+      --title: 'Zuume Bold', 'Zuume', 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+      --body: 'Area Normal', 'Area', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      background: var(--off);
+      color: var(--black);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    ::selection { background: var(--yellow); color: var(--black); }
+
+    .page { min-height: 100vh; position: relative; }
+    .noise::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .container { width: var(--container); margin-inline: auto; }
+    .section { position: relative; padding: clamp(80px, 9vw, 138px) 0; overflow: hidden; }
+    .section-tight { padding: clamp(56px, 7vw, 92px) 0; }
+    .invert { color: var(--white); }
+
+    .eyebrow {
+      background: transparent;
+      box-shadow: none;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 14px;
+      padding-left: 0;
+      font-size: 12px;
+      line-height: 1.15;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .eyebrow::before { display: none; }
+    .kicker { font-size: clamp(14px, 1vw, 16px); line-height: 1.35; opacity: .72; margin: 0; }
+    .body-copy {
+      font-size: clamp(16px, 1.1vw, 19px);
+      line-height: 1.58;
+      letter-spacing: -.005em;
+      margin: 0;
+      color: rgba(8, 8, 8, .76);
+    }
+    .invert .body-copy, .invert .kicker { color: rgba(255,255,255,.74); }
+    .lead {
+      font-size: clamp(19px, 2vw, 32px);
+      line-height: 1.14;
+      letter-spacing: -.012em;
+      margin: 0;
+    }
+    .display, .title, .title-small, .hero-title {
+      font-family: var(--title);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: -.008em;
+      line-height: .92;
+      margin: 0;
+      text-wrap: balance;
+    }
+    .display { font-size: clamp(56px, 10vw, 170px); }
+    .title { font-size: clamp(42px, 6vw, 102px); }
+    .title-small { font-size: clamp(30px, 4.05vw, 72px); }
+    .hero-title { font-size: clamp(46px, 7.2vw, 120px); max-width: 10.8ch; }
+    .tight-title { max-width: 9.6ch; }
+    .marker {
+      position: relative;
+      display: inline-block;
+      padding-inline: .02em;
+      z-index: 1;
+      white-space: nowrap;
+    }
+    .marker::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: .08em;
+      width: 102%;
+      height: .14em;
+      transform: translateX(-50%) rotate(-1.2deg);
+      background: var(--yellow);
+      border-radius: 999px;
+      z-index: -1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 15px 22px;
+      border: 2px solid var(--black);
+      border-radius: 999px;
+      font-weight: 850;
+      line-height: 1;
+      transition: transform .35s var(--ease), background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:active { transform: translateY(-1px); }
+    .btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+    .btn-wa {
+      background: var(--green);
+      border-color: var(--black);
+      color: var(--black);
+      box-shadow: 0 12px 0 rgba(8,8,8,.08);
+    }
+    .btn-wa:hover { background: var(--yellow); color: var(--black); box-shadow: 0 8px 0 rgba(8,8,8,.08); }
+    .btn-wa-hero:hover { background: var(--white); }
+    .btn-outline {
+      background: transparent;
+      border-color: var(--black);
+      color: var(--black);
+      box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+    .invert .btn-outline {
+      border-color: rgba(255,255,255,.82);
+      color: var(--white);
+    }
+    .invert .btn-outline:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+
+    .topbar {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: min(1220px, calc(100vw - 24px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 12px 10px 30px;
+      background: rgba(244,241,234,.78);
+      border: 1px solid rgba(8,8,8,.12);
+      border-radius: 999px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 14px 42px rgba(8,8,8,.08);
+    }
+    .topbar-logo { height: 19px; width: auto; }
+    .topbar-nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 800;
+    }
+    .topbar-nav a { opacity: .74; transition: opacity .25s ease; }
+    .topbar-nav a:hover { opacity: 1; }
+    .topbar .btn { min-height: 42px; padding: 11px 16px; box-shadow: none; font-size: 13px; }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 90px 0 28px;
+      background: var(--black);
+      color: var(--white);
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background: #111;
+    }
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 76% 46%, rgba(255,217,40,.16), transparent 24%),
+        linear-gradient(90deg, rgba(8,8,8,.96) 0%, rgba(8,8,8,.62) 43%, rgba(8,8,8,.82) 100%),
+        linear-gradient(0deg, rgba(8,8,8,.92), rgba(8,8,8,.26) 55%, rgba(8,8,8,.58));
+    }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); filter: saturate(.95) contrast(1.05); }
+    .hero-bg-slides { position: absolute; inset: 0; }
+    .hero-bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transform: scale(1.06); transition: opacity 1s var(--ease), transform 7.2s var(--ease); filter: grayscale(1) saturate(0) contrast(1.08) brightness(.44); }
+    .hero-bg-slide.is-active { opacity: 1; transform: scale(1); }
+    .hero-grid {
+      min-height: calc(100svh - 118px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, .57fr);
+      gap: clamp(24px, 3vw, 56px);
+      align-items: start;
+    }
+    .hero-left { display: flex; flex-direction: column; justify-content: flex-start; position: relative; z-index: 2; }
+    .hero-headspace {
+      height: clamp(58px, 6vw, 92px);
+      width: 100%;
+    }
+    .hero-copy { max-width: 650px; color: rgba(255,255,255,.78); margin: 0 0 24px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; padding: 0; list-style: none; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 13px;
+      border: 1px solid var(--line-invert);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.86);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 750;
+      backdrop-filter: blur(8px);
+    }
+    .tag::before { content: "✓"; color: var(--yellow); font-weight: 900; }
+
+    .hero-motion {
+      padding-top: 0;
+      margin-top: -90px;
+      height: calc(100% + 90px);
+      align-self: stretch;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      pointer-events: none;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-motion-inner {
+      width: min(620px, 100%);
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .motion-video {
+      width: auto;
+      max-width: 100%;
+      height: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 18px 42px rgba(0,0,0,.28));
+    }
+    .hero-motion .motion-video {
+      transform: translateY(18px);
+      transform-origin: bottom center;
+    }
+
+    .hero-card {
+      padding-top: clamp(82px, 8vw, 132px);
+      align-self: start;
+    }
+    .hero-card-shell {
+      border: 1px solid var(--line-invert);
+      border-radius: var(--radius);
+      background: rgba(8,8,8,.42);
+      padding: 16px;
+      backdrop-filter: blur(16px);
+    }
+    .hero-card-inner {
+      min-height: 520px;
+      border-radius: calc(var(--radius) - 10px);
+      overflow: hidden;
+      position: relative;
+      background: #141414;
+    }
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .9s var(--ease), transform 4.4s var(--ease);
+      transform: scale(1.05);
+    }
+    .hero-slide.is-active { opacity: 1; transform: scale(1.0); }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,8,8,.02), rgba(8,8,8,.2) 45%, rgba(8,8,8,.42));
+      pointer-events: none;
+    }
+    .hero-stamp {
+      position: absolute;
+      inset: auto 18px 18px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.9);
+      color: var(--black);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      z-index: 2;
+    }
+    .target,
+    .target-sep {
+      position: relative;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+    .target {
+      width: 42px; height: 42px;
+      background: var(--yellow);
+      border: 6px solid var(--black);
+      box-shadow: inset 0 0 0 7px var(--yellow), inset 0 0 0 13px var(--black);
+    }
+    .target-sep {
+      width: 18px;
+      height: 18px;
+      border: 3px solid var(--white);
+      box-shadow: inset 0 0 0 3px var(--black), inset 0 0 0 6px var(--white);
+      background: transparent;
+      top: 1px;
+    }
+    .hero-dots {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+    }
+    .hero-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(255,255,255,.36);
+      transition: transform .35s var(--ease), background .35s var(--ease);
+    }
+    .hero-dot.is-active { background: var(--yellow); transform: scale(1.2); }
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .62;
+    }
+
+    .marquee {
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      overflow: hidden;
+      background: rgba(255,255,255,.03);
+      margin-top: 26px;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+      padding: 16px 0;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      white-space: nowrap;
+      font-family: var(--title);
+      font-size: clamp(28px, 4vw, 64px);
+      line-height: .82;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      color: rgba(255,255,255,.12);
+    }
+
+    .problem { background: var(--off); }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(320px, .72fr);
+      gap: clamp(34px, 7vw, 100px);
+      align-items: start;
+    }
+    .big-question { position: sticky; top: 102px; }
+    .problem-panel {
+      padding: clamp(24px, 3vw, 42px);
+      border: 2px solid var(--black);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 16px 16px 0 var(--yellow);
+    }
+    .problem-list { list-style: none; padding: 0; margin: 26px 0 30px; display: grid; gap: 14px; }
+    .problem-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      font-size: clamp(17px, 1.3vw, 22px);
+      line-height: 1.14;
+      letter-spacing: -.01em;
+    }
+    .problem-list li::before {
+      content: "";
+      width: 24px; height: 24px;
+      border-radius: 999px;
+      border: 5px solid var(--black);
+      background: var(--yellow);
+      margin-top: 1px;
+    }
+
+    .positioning {
+      background: var(--black);
+      color: var(--white);
+    }
+    .positioning::before {
+      content: "";
+      position: absolute;
+      right: -170px;
+      top: 80px;
+      width: 440px;
+      height: 440px;
+      border: 34px solid rgba(255,217,40,.16);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .positioning-top {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(320px, .4fr);
+      gap: clamp(8px, 1.8vw, 18px);
+      align-items: center;
+    }
+    .positioning-top .body-copy { max-width: 430px; justify-self: start; }
+    .positioning-title { max-width: 10.8ch; }
+    .positioning-body {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(320px, .95fr);
+      gap: clamp(44px, 6vw, 92px);
+      align-items: center;
+      margin-top: clamp(52px, 7vw, 96px);
+    }
+    .positioning-claim { display: grid; gap: 24px; align-content: center; min-height: 444px; max-width: 560px; }
+    .word-map {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line-invert);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      min-height: 444px;
+    }
+    .word-map::before,
+    .word-map::after {
+      content: "";
+      position: absolute;
+      inset: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      pointer-events: none;
+    }
+    .word-map::after {
+      inset: 70px;
+      border-color: rgba(255,217,40,.24);
+    }
+    .word-chip {
+      position: relative;
+      z-index: 1;
+      min-height: 116px;
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.006em;
+      font-size: clamp(19px, 1.95vw, 30px);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset;
+    }
+    .word-chip span { font-size: 12px; letter-spacing: .12em; opacity: .58; margin-bottom: 12px; }
+    .word-chip:nth-child(1) { background: var(--yellow); color: var(--black); align-self: end; width: 100%; }
+    .word-chip:nth-child(2) { background: var(--pink); color: var(--black); margin-top: 34px; }
+    .word-chip:nth-child(3) { background: var(--blue); color: var(--white); }
+    .word-chip:nth-child(4) { background: var(--green); color: var(--black); }
+    .word-chip:nth-child(5) { grid-column: 1 / -1; background: var(--white); color: var(--black); min-height: 118px; }
+
+    .founders {
+      margin-top: clamp(78px, 9vw, 128px);
+      display: grid;
+      grid-template-columns: minmax(250px, .55fr) minmax(0, 1fr);
+      gap: clamp(30px, 5vw, 74px);
+      align-items: start;
+    }
+    .founder-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-items: start;
+    }
+    .founder-card {
+      background: var(--white);
+      color: var(--black);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      display: flex;
+      flex-direction: column;
+    }
+    .founder-media { overflow: hidden; background: #e7e5e1; }
+    .founder-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform .9s var(--ease);
+    }
+    .founder-card:hover img { transform: scale(1.06); }
+    .founder-card-body { padding: 20px 22px 16px; }
+    .founder-card h3 { margin: 0 0 6px; font-size: 24px; line-height: 1; letter-spacing: -.03em; }
+    .founder-card .role { font-weight: 850; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: rgba(8,8,8,.58); margin-bottom: 16px; }
+
+    .areas { background: var(--off); }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .84fr) minmax(280px, .45fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: clamp(36px, 5vw, 66px);
+    }
+    .section-head .title,
+    .section-head .title-small { max-width: 10.4ch; }
+    .founders-copy .title-small { font-size: clamp(34px, 4.5vw, 82px); }
+    .area-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .area-card {
+      position: relative;
+      min-height: 520px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--black);
+      color: var(--white);
+      isolation: isolate;
+    }
+    .area-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+      transition: transform 1s var(--ease);
+    }
+    .area-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--overlay, rgba(81,197,53,.58));
+      mix-blend-mode: multiply;
+      z-index: -2;
+      transition: opacity .55s var(--ease);
+    }
+    .area-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(8,8,8,.08), rgba(8,8,8,.18) 40%, rgba(8,8,8,.88));
+    }
+    .area-card:hover img { transform: scale(1.06); }
+    .area-card:hover::before { opacity: 0; }
+    .area-content { position: absolute; inset: auto 0 0; padding: 26px; }
+    .area-number {
+      font-family: var(--title);
+      font-size: 88px;
+      line-height: .78;
+      letter-spacing: -.02em;
+      color: var(--yellow);
+      margin-bottom: 14px;
+    }
+    .area-card h3 { margin: 0 0 12px; font-size: clamp(24px, 2vw, 38px); line-height: .96; letter-spacing: -.02em; }
+    .area-card p { margin: 0; color: rgba(255,255,255,.82); line-height: 1.42; }
+
+    .portfolio { background: var(--black); color: var(--white); }
+    .carousel-shell { margin-top: 42px; position: relative; }
+    .portfolio-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(310px, 42vw);
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 0 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--yellow) rgba(255,255,255,.12);
+    }
+    .project-card {
+      scroll-snap-align: start;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line-invert);
+      background: rgba(255,255,255,.06);
+      min-height: 560px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+    .project-card figure { margin: 0; position: relative; overflow: hidden; min-height: 420px; }
+    .project-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 1s var(--ease); }
+    .project-card:hover img { transform: scale(1.05); }
+    .project-meta { padding: 22px; display: grid; gap: 10px; }
+    .project-meta small { text-transform: uppercase; letter-spacing: .12em; color: var(--yellow); font-weight: 850; }
+    .project-meta h3 { margin: 0; font-size: clamp(23px, 2vw, 40px); line-height: .94; letter-spacing: -.02em; }
+    .project-meta p { margin: 0; color: rgba(255,255,255,.68); }
+    .carousel-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+    .round-btn {
+      width: 48px; height: 48px;
+      border-radius: 999px;
+      border: 1px solid var(--line-invert);
+      background: rgba(255,255,255,.08);
+      color: var(--white);
+      cursor: pointer;
+      transition: background .3s var(--ease), transform .3s var(--ease), color .3s var(--ease);
+    }
+    .round-btn:hover { background: var(--yellow); color: var(--black); transform: translateY(-2px); }
+
+    .proof { background: var(--pink); color: var(--black); }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .88fr) minmax(340px, .72fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 36px;
+    }
+    .proof .section-head .body-copy { color: rgba(255,255,255,.84); }
+    .video-proof, .quote-card {
+      border: 2px solid var(--black);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--off);
+      box-shadow: 12px 12px 0 rgba(8,8,8,.15);
+    }
+    .video-proof { display: grid; grid-template-rows: auto auto; min-height: 0; align-self: start; }
+    .video-proof video {
+      width: 100%;
+      aspect-ratio: 9 / 14;
+      height: auto;
+      max-height: 520px;
+      min-height: 0;
+      object-fit: cover;
+      background: var(--black);
+    }
+    .proof-caption {
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+    }
+    .proof-caption strong, .quote-card strong { display: block; font-size: 24px; line-height: 1.02; letter-spacing: -.02em; }
+    .proof-caption span, .quote-card span { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; opacity: .62; margin-top: 7px; }
+    .proof-caption small { font-size: 14px; opacity: .78; }
+    .quotes { display: grid; gap: 14px; }
+    .quote-card { padding: 22px 24px; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; }
+    .quote-card p { font-size: clamp(18px, 1.45vw, 25px); line-height: 1.18; letter-spacing: -.012em; margin: 0 0 18px; }
+    .quote-card.is-highlight { background: var(--off); justify-content: flex-start; }
+    .watch-video-cue {
+      font-size: clamp(30px, 3vw, 48px);
+      line-height: 1;
+      font-weight: 900;
+      color: var(--black);
+      margin: 12px 0 8px;
+    }
+    .watch-label {
+      display: block;
+      font-size: 12px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 900;
+      opacity: .58;
+    }
+    .proof-mobile-only { display: none; }
+
+    .process { background: var(--off); }
+    .timeline { margin-top: 48px; border-top: 2px solid var(--black); }
+    .step {
+      display: grid;
+      grid-template-columns: 150px minmax(0, .56fr) minmax(280px, 1fr);
+      gap: clamp(16px, 4vw, 60px);
+      align-items: baseline;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .step-num {
+      font-family: var(--title);
+      font-size: clamp(42px, 5vw, 82px);
+      line-height: .78;
+      letter-spacing: -.02em;
+      color: var(--red);
+    }
+    .step h3 { margin: 0; font-size: clamp(24px, 2.1vw, 42px); line-height: .96; letter-spacing: -.012em; }
+    .step p { margin: 0; color: rgba(8,8,8,.72); font-size: 18px; line-height: 1.5; }
+
+    .objections { background: var(--black); color: var(--white); }
+    .objection-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .68fr) minmax(340px, .92fr);
+      gap: clamp(28px, 5vw, 78px);
+      align-items: start;
+      margin-top: 40px;
+    }
+    .objection-grid > * { align-self: start; }
+    .accordion { margin-top: 0; }
+    .objection-visual {
+      position: sticky;
+      top: 102px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line-invert);
+      min-height: 540px;
+      background: #171717;
+    }
+    .objection-visual img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      object-position: 54% 42%;
+      transition: transform 1s var(--ease);
+    }
+    .objection-visual:hover img { transform: scale(1.06); }
+    .accordion { display: grid; gap: 12px; }
+    .acc-item { border: 1px solid var(--line-invert); border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.06); }
+    .acc-trigger {
+      width: 100%;
+      padding: 22px;
+      background: transparent;
+      color: var(--white);
+      border: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      cursor: pointer;
+      text-align: left;
+      font-weight: 850;
+      font-size: clamp(19px, 1.46vw, 26px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+    .acc-trigger span { color: var(--yellow); font-family: var(--title); font-size: 42px; line-height: .7; }
+    .acc-content { max-height: 0; overflow: hidden; transition: max-height .5s var(--ease); }
+    .acc-content p { margin: 0; padding: 0 22px 24px; color: rgba(255,255,255,.72); line-height: 1.48; }
+    .acc-item.is-open .acc-content { max-height: 360px; }
+
+    .form-section { background: var(--yellow); }
+    .form-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(360px, .72fr);
+      gap: clamp(30px, 5vw, 78px);
+      align-items: start;
+    }
+    .form-box {
+      background: var(--white);
+      border: 2px solid var(--black);
+      border-radius: var(--radius);
+      padding: clamp(22px, 3vw, 42px);
+      box-shadow: 16px 16px 0 rgba(8,8,8,.16);
+    }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; font-weight: 850; margin-bottom: 8px; }
+    .field input, .field select {
+      width: 100%;
+      min-height: 54px;
+      border: 1px solid rgba(8,8,8,.22);
+      border-radius: 16px;
+      padding: 0 16px;
+      background: #fafafa;
+      color: var(--black);
+      outline: none;
+      transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .field input:focus, .field select:focus { border-color: var(--black); background: #fff; box-shadow: 0 0 0 5px rgba(255,217,40,.32); }
+    .form-note { font-size: 13px; line-height: 1.38; color: rgba(8,8,8,.58); margin-top: 16px; }
+    .side-claim { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 100%; }
+    .contact-motion {
+      width: min(420px, 78vw);
+      align-self: center;
+      display: flex;
+      justify-content: center;
+      margin-top: auto;
+      margin-bottom: -1px;
+      overflow: hidden;
+    }
+    .contact-motion .motion-video {
+      width: 100%;
+      max-width: 420px;
+      filter: none;
+    }
+
+    .explore { background: var(--off); }
+    .feed-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 44px; }
+    .feed-tile {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--black);
+      border: 1px solid var(--line);
+    }
+    .feed-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .feed-tile:hover img { transform: scale(1.08); }
+    .feed-tile::after {
+      content: "↗";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: .35s var(--ease);
+    }
+    .feed-tile:hover::after { opacity: 1; transform: translateY(0); }
+
+    .footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 54px 0 44px;
+      text-align: center;
+    }
+    .footer-logo { height: 24px; width: auto; margin: 0 auto 16px; }
+    .footer p { margin: 0; color: rgba(255,255,255,.62); font-size: 13px; }
+
+    [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .08s; }
+    .delay-2 { transition-delay: .16s; }
+    .delay-3 { transition-delay: .24s; }
+
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    @media (max-width: 1100px) {
+      .quote-card.is-highlight::before,
+      .quote-card.is-highlight::after { display: none; }
+      .topbar-nav { display: none; }
+      .hero-grid,
+      .split,
+      .positioning-top,
+      .positioning-body,
+      .founders,
+      .section-head,
+      .proof-grid,
+      .objection-grid,
+      .form-wrap { grid-template-columns: 1fr; }
+      .big-question, .objection-visual { position: relative; top: auto; }
+      .hero-motion { padding-top: 0; margin-top: -82px; height: calc(100% + 82px); align-self: stretch; max-width: 620px; }
+      .hero-motion-inner { width: min(560px, 100%); height: 100%; align-items: flex-end; }
+      .hero-headspace { height: clamp(48px, 7vw, 78px); }
+      .area-grid { grid-template-columns: 1fr; }
+      .area-card { min-height: 440px; }
+      .portfolio-track { grid-auto-columns: minmax(310px, 72vw); }
+      .feed-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 700px) {
+      /* EPICORE MOBILE FINAL PATCH */
+
+      .hero-motion {
+        z-index: 0;
+        pointer-events: none;
+        opacity: .82;
+      }
+      .hero-left {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-left .btn,
+      .hero-left a,
+      .hero-left button {
+        position: relative;
+        z-index: 4;
+        pointer-events: auto;
+      }
+      .positioning {
+        padding-top: 56px;
+      }
+      .positioning .section-head {
+        margin-bottom: 22px;
+      }
+      .word-map {
+        margin-top: 18px;
+      }
+      .proof .quote-card.is-highlight {
+        display: none;
+      }
+      .proof-grid {
+        gap: 14px;
+      }
+      .quotes {
+        display: grid;
+        gap: 14px;
+      }
+      .video-proof {
+        align-self: start;
+      }
+      .proof .quotes {
+        display: block;
+      }
+      .process .step {
+        grid-template-columns: 42px minmax(0, 1fr);
+        column-gap: 12px;
+        row-gap: 4px;
+        align-items: start;
+      }
+      .process .step p {
+        grid-column: 2;
+        margin-top: 2px;
+      }
+      .process .step h3,
+      .step-title {
+        grid-column: 2;
+      }
+      .step-num {
+        grid-column: 1;
+      }
+      .form-wrap {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-wrap > div:first-child {
+        order: 1;
+      }
+      .form-wrap > .form-box {
+        order: 2;
+      }
+      .form-wrap > .contact-motion {
+        order: 3;
+        margin-top: 16px;
+      }
+      :root { --container: min(100vw - 28px, 520px); --radius: 22px; }
+      .section { padding: 68px 0; }
+      .topbar { top: 8px; padding: 8px 8px 8px 22px; }
+      .topbar-logo { height: 18px; }
+      .topbar .btn { font-size: 0; width: 42px; height: 42px; padding: 0; }
+      .topbar .btn svg { width: 19px; height: 19px; }
+      .hero { padding-top: 82px; min-height: auto; }
+      .hero-grid { min-height: 680px; align-items: start; position: relative; }
+      .hero-headspace { height: clamp(42px, 8vw, 64px); }
+      .hero-title { font-size: clamp(42px, 12.8vw, 80px); }
+      .hero-motion { position: absolute; inset: 74px 0 0; width: 100%; max-width: none; height: auto; min-height: calc(100% - 74px); margin-top: 0; align-items: flex-end; justify-content: center; opacity: .86; z-index: 0; }
+      .hero-motion-inner { width: min(520px, 92vw); height: auto; justify-content: center; align-items: flex-end; }
+      .hero-motion .motion-video { width: 100%; height: auto; transform: translateY(36px); }
+      .hero-stamp { font-size: 12px; }
+      .scroll-hint { display: none; }
+      .problem-panel { box-shadow: 9px 9px 0 var(--yellow); }
+      .positioning-body { margin-top: 22px; gap: 16px; }
+      .positioning-claim { min-height: auto; gap: 12px; }
+      .positioning-claim > div:last-child { margin-top: 0; }
+      .word-map { grid-template-columns: 1fr; min-height: auto; }
+      .word-chip:nth-child(2) { margin-top: 0; }
+      .word-chip:nth-child(5) { grid-column: span 1; }
+      .founder-cards { grid-template-columns: 1fr; }
+      .founder-card img { height: 320px; }
+      .portfolio-track { grid-auto-columns: minmax(280px, 88vw); }
+      .project-card { min-height: 500px; }
+      .project-card figure { min-height: 350px; }
+      .quote-card.is-highlight { display: none; }
+      .timeline { margin-top: 28px; }
+      .step { grid-template-columns: 42px minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: start; padding: 22px 0; }
+      .step-num { grid-column: 1; grid-row: 1 / span 2; font-size: 34px; line-height: .82; }
+      .step h3 { grid-column: 2; grid-row: 1; font-size: 22px; line-height: 1; }
+      .step p { grid-column: 2; grid-row: 2; font-size: 16px; line-height: 1.34; max-width: 100%; }
+      .objection-visual { min-height: 360px; }
+      .objection-visual img { height: 360px; }
+      .feed-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+      .feed-tile { flex: 0 0 72%; scroll-snap-align: start; }
+      .form-wrap { display: flex; flex-direction: column; }
+      .side-claim { display: contents; }
+      .side-claim > div:first-child { order: 1; }
+      .form-box { order: 2; }
+      .contact-motion { order: 3; width: min(320px, 82vw); margin: 24px auto -1px; }
+      .btn { width: 100%; min-height: 56px; }
+      .proof-caption { flex-direction: column; align-items: flex-start; }
+      .proof-caption small { margin-top: 6px; }
+      .marquee-item { font-size: clamp(24px, 7vw, 40px); gap: 14px; }
+      .eyebrow { padding-left: 34px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    }
+  
+
+    /* =========================
+       V3 — direção mais sóbria
+       Preto, branco e cinza como base; cores da marca como acento.
+       ========================= */
+    :root {
+      --off: #f1eee8;
+      --soft-black: #101010;
+      --line: rgba(8, 8, 8, .18);
+      --line-invert: rgba(255, 255, 255, .16);
+    }
+    body { background: var(--off); }
+    ::selection { background: #dad5ca; color: var(--black); }
+    .noise::before { opacity: .035; }
+
+    .btn {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+      box-shadow: none;
+    }
+    .btn:hover { background: var(--yellow); color: var(--black); border-color: var(--black); }
+    .btn-wa { background: var(--green); color: var(--black); border-color: var(--green); }
+    .btn-wa:hover { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .topbar .btn-wa { background: var(--black); color: var(--white); border-color: var(--black); }
+    .topbar .btn-wa:hover { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .btn-invert { background: var(--white); color: var(--black); border-color: var(--white); }
+    .btn-invert:hover { background: var(--yellow); border-color: var(--yellow); color: var(--black); }
+    .btn-outline { background: transparent; color: var(--black); border-color: var(--black); }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+    .invert .btn-outline { color: var(--white); border-color: rgba(255,255,255,.72); }
+
+    .hero-media::after {
+      background:
+        radial-gradient(circle at 74% 46%, rgba(255,255,255,.08), transparent 28%),
+        linear-gradient(90deg, rgba(8,8,8,.985) 0%, rgba(8,8,8,.78) 48%, rgba(8,8,8,.94) 100%),
+        linear-gradient(0deg, rgba(8,8,8,.94), rgba(8,8,8,.42) 54%);
+    }
+    .hero-media img { filter: grayscale(1) saturate(.15) contrast(1.05) brightness(.72); }
+    .hero-bg-slide { filter: grayscale(1) saturate(0) contrast(1.08) brightness(.38); }
+    .hero-copy, .invert .body-copy, .invert .kicker { color: rgba(255,255,255,.68); }
+    .tag { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.14); color: rgba(255,255,255,.78); }
+    .tag::before { color: var(--white); }
+    .marker::after { background: var(--yellow); height: .12em; }
+
+    .marquee { background: var(--black); }
+    .marquee b, .target-sep { color: rgba(255,255,255,.22); }
+
+    .problem-panel {
+      box-shadow: none;
+      background: #fbfaf7;
+      border-color: var(--black);
+      transform: none;
+    }
+    .problem-list li::before { background: var(--yellow); border-color: var(--black); }
+
+    .positioning { background: #050505; }
+    .positioning::before { right: -185px; top: 22px; width: 660px; height: 660px; border: 0; background: radial-gradient(circle at center, rgba(255,255,255,.085) 0 10%, transparent 10% 22%, rgba(255,255,255,.085) 22% 32%, transparent 32% 44%, rgba(255,255,255,.085) 44% 54%, transparent 54% 100%); }
+    .word-map { background: rgba(255,255,255,.035); border-color: rgba(255,255,255,.12); }
+    .word-map::after { border-color: rgba(255,255,255,.16); }
+    .word-chip { transform: none !important; border-color: rgba(255,255,255,.12); font-size: clamp(15px, 1.55vw, 24px); }
+    .word-chip:nth-child(1) { background: #f4f1ea !important; color: var(--black) !important; }
+    .word-chip:nth-child(2) { background: #141414 !important; color: var(--white) !important; }
+    .word-chip:nth-child(3) { background: #141414 !important; color: var(--white) !important; }
+    .word-chip:nth-child(4) { background: #f4f1ea !important; color: var(--black) !important; }
+    .word-chip:nth-child(5) { background: #f4f1ea !important; color: var(--black) !important; white-space: nowrap; }
+    .word-chip span { opacity: .5; }
+
+    .founder-card { background: #f7f5f0; border: 1px solid rgba(8,8,8,.08); }
+    .founder-card img { filter: none; transition: transform .8s var(--ease); }
+    .founder-card:hover img { filter: none; transform: scale(1.025); }
+
+    .areas { background: #ebe8e1; }
+    .area-card { border-color: rgba(8,8,8,.18); background: var(--black); }
+    .area-card img { filter: grayscale(1) saturate(.1) contrast(1.04) brightness(.8); }
+    .area-card:hover img { filter: grayscale(0) saturate(.85) contrast(1.02) brightness(.9); }
+    .area-card::after { background: linear-gradient(180deg, rgba(8,8,8,.20), rgba(8,8,8,.86)); }
+    .area-number { color: rgba(255,255,255,.88); }
+
+    .portfolio { background: #050505; }
+    .project-card { background: rgba(255,255,255,.045); border-color: rgba(255,255,255,.12); }
+    .project-card img { filter: grayscale(1) saturate(.1) contrast(1.05); }
+    .project-card:hover img { filter: grayscale(0) saturate(.85) contrast(1.02); }
+    .project-meta small { color: rgba(255,255,255,.48); }
+    .round-btn:hover { background: var(--white); color: var(--black); }
+
+    .proof { background: #111; color: var(--white); }
+    .proof .lead,
+    .proof .body-copy { color: rgba(255,255,255,.84); }
+    .video-proof, .quote-card { background: #f5f2eb; color: var(--black); box-shadow: none; border-color: rgba(255,255,255,.14); }
+    .quote-card.is-highlight { background: #f5f2eb; }
+    .play::before { border-left-color: var(--white); }
+
+    .process { background: var(--off); }
+    .step-num { color: rgba(8,8,8,.42); }
+
+    .objections { background: #050505; }
+    .objection-visual { background: #171717; margin-top: -18px; }
+    .objection-visual img { mix-blend-mode: normal; opacity: 1; filter: none; }
+    .acc-trigger span { color: rgba(255,255,255,.78); }
+
+    .form-section { background: #e8e4dc; padding-bottom: 0; }
+    .form-wrap { align-items: center; }
+    .form-box { box-shadow: none; background: #fbfaf7; }
+    .field input, .field select { background: #f6f5f1; }
+    .field input:focus, .field select:focus { box-shadow: 0 0 0 5px rgba(8,8,8,.08); }
+    .contact-motion .motion-video { opacity: .86; }
+
+    .feed-tile img { filter: grayscale(1) saturate(.1) contrast(1.04); }
+    .feed-tile:hover img { filter: grayscale(0) saturate(.85) contrast(1.02); }
+    .feed-tile::after { background: var(--black); color: var(--white); }
+
+    .footer { background: #050505; }
+
+    @media (max-width: 700px) {
+      .hero-grid { min-height: 680px; position: relative; }
+      .hero-left { position: relative; z-index: 2; }
+      .hero-motion { position: absolute; inset: 74px 0 0; width: 100%; max-width: none; min-height: calc(100% - 74px); margin-top: 0; z-index: 0; pointer-events: none; }
+      .hero-motion-inner { width: min(520px, 92vw); height: auto; }
+      .hero-motion .motion-video { width: 100%; height: auto; transform: translateY(36px); }
+      .positioning-body { margin-top: 22px; gap: 16px; }
+      .positioning-claim { min-height: auto; gap: 12px; }
+      .positioning-claim > div:last-child { margin-top: 0; }
+      .quote-card.is-highlight { display: none; }
+      .step { grid-template-columns: 42px minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: start; padding: 22px 0; }
+      .step-num { grid-column: 1; grid-row: 1 / span 2; font-size: 34px; line-height: .82; }
+      .step h3 { grid-column: 2; grid-row: 1; font-size: 22px; line-height: 1; }
+      .step p { grid-column: 2; grid-row: 2; font-size: 16px; line-height: 1.34; max-width: 100%; }
+      .form-wrap { display: flex; flex-direction: column; align-items: stretch; }
+      .side-claim { display: contents; }
+      .side-claim > div:first-child { order: 1; }
+      .form-box { order: 2; width: 100%; }
+      .contact-motion { order: 3; width: min(320px, 82vw); margin: 16px auto -1px; }
+    }
+
+
+  
+
+/* =========================================================
+   MOBILE FORCE PATCH — EPICORE
+   Regras finais, de alta especificidade, para garantir o comportamento mobile.
+   ========================================================= */
+@media (max-width: 1100px) {
+  body.epicore-mobile-force .proof .proof-grid,
+  .proof .proof-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  body.epicore-mobile-force .proof .quotes,
+  .proof .quotes {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  body.epicore-mobile-force .proof .quotes > .quote-card.is-highlight,
+  .proof .quotes > .quote-card.is-highlight,
+  body.epicore-mobile-force .proof .watch-video-cue,
+  body.epicore-mobile-force .proof .watch-label {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.epicore-mobile-force .proof .quotes > .quote-card:not(.is-highlight),
+  .proof .quotes > .quote-card:not(.is-highlight) {
+    display: flex !important;
+    visibility: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  body.epicore-mobile-force .process .timeline,
+  .process .timeline {
+    margin-top: 24px !important;
+  }
+
+  body.epicore-mobile-force .process .step,
+  .process .step {
+    display: grid !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    column-gap: 10px !important;
+    row-gap: 2px !important;
+    align-items: start !important;
+    padding: 20px 0 !important;
+  }
+
+  body.epicore-mobile-force .process .step-num,
+  .process .step-num {
+    grid-column: 1 !important;
+    grid-row: 1 / span 2 !important;
+    font-size: 32px !important;
+    line-height: .82 !important;
+    margin: 0 !important;
+  }
+
+  body.epicore-mobile-force .process .step h3,
+  .process .step h3 {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    margin: 0 0 3px !important;
+    max-width: 100% !important;
+  }
+
+  body.epicore-mobile-force .process .step p,
+  .process .step p {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    font-size: 16px !important;
+    line-height: 1.34 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  body.epicore-mobile-force .form-section .form-wrap,
+  .form-section .form-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 22px !important;
+  }
+
+  body.epicore-mobile-force .form-section .side-claim,
+  .form-section .side-claim {
+    display: contents !important;
+  }
+
+  body.epicore-mobile-force .form-section .side-claim > div:first-child,
+  .form-section .side-claim > div:first-child {
+    order: 1 !important;
+  }
+
+  body.epicore-mobile-force .form-section .form-box,
+  .form-section .form-box {
+    order: 2 !important;
+    width: 100% !important;
+  }
+
+  body.epicore-mobile-force .form-section .contact-motion,
+  .form-section .contact-motion {
+    order: 3 !important;
+    width: min(320px, 82vw) !important;
+    margin: 8px auto -1px !important;
+  }
+
+  body.epicore-mobile-force .positioning .positioning-body,
+  .positioning .positioning-body {
+    margin-top: 20px !important;
+    gap: 14px !important;
+  }
+
+  body.epicore-mobile-force .positioning .positioning-claim,
+  .positioning .positioning-claim {
+    min-height: auto !important;
+    gap: 10px !important;
+  }
+
+  body.epicore-mobile-force .positioning .positioning-claim > div:last-child,
+  .positioning .positioning-claim > div:last-child {
+    margin-top: 0 !important;
+  }
+
+  body.epicore-mobile-force .positioning .word-map,
+  .positioning .word-map {
+    margin-top: 14px !important;
+  }
+}
+
+
+/* =========================================================
+   CLIENT ROUND — EPICORE refinamentos
+   ========================================================= */
+:root {
+  --orange: #ed6c1e;
+  --pink: #ec559a;
+  --green: #51c535;
+  --blue: #0870ee;
+  --red: #f13a28;
+  --yellow: #ffd928;
+  --dark-blue: #061a3a;
+}
+.topbar-nav a:hover { color: var(--green); opacity: 1; }
+.btn-wa,
+.topbar .btn-wa {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+  color: var(--black) !important;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+.btn-wa:hover,
+.topbar .btn-wa:hover {
+  background: var(--yellow) !important;
+  border-color: var(--yellow) !important;
+  color: var(--black) !important;
+}
+.marker::after { background: var(--blue) !important; }
+
+.hero-project-motion {
+  min-height: calc(100svh - 118px);
+  margin-top: 0 !important;
+  align-items: stretch;
+  overflow: visible;
+}
+.project-motion-stack {
+  width: min(430px, 32vw);
+  height: min(720px, calc(100svh - 112px));
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  align-self: stretch;
+  background: transparent;
+}
+.project-motion-stack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  animation: projectVerticalFade 18s infinite;
+  filter: grayscale(1) saturate(.1) contrast(1.08) brightness(.82);
+}
+.project-motion-stack img:nth-child(2) { animation-delay: 3s; }
+.project-motion-stack img:nth-child(3) { animation-delay: 6s; }
+.project-motion-stack img:nth-child(4) { animation-delay: 9s; }
+.project-motion-stack img:nth-child(5) { animation-delay: 12s; }
+.project-motion-stack img:nth-child(6) { animation-delay: 15s; }
+@keyframes projectVerticalFade {
+  0% { opacity: 0; transform: scale(1.06) translateY(16px); }
+  5% { opacity: 1; }
+  20% { opacity: 1; transform: scale(1.16) translateY(-14px); }
+  25% { opacity: 0; transform: scale(1.18) translateY(-20px); }
+  100% { opacity: 0; }
+}
+.tag {
+  transition: border-color .35s ease, box-shadow .35s ease, background .35s ease, color .35s ease, transform .35s ease;
+}
+.tag:hover {
+  border-color: rgba(81,197,53,.72);
+  background: rgba(81,197,53,.12);
+  box-shadow: 0 0 22px rgba(81,197,53,.22), inset 0 0 20px rgba(255,255,255,.08);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.problem .eyebrow { display:none; }
+.problem .tight-title { font-size: clamp(56px, 7.5vw, 122px); }
+.problem-panel {
+  background: var(--blue) !important;
+  color: #fff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.problem-panel .lead,
+.problem-panel .problem-list { color: #fff !important; }
+.problem-panel .lead { line-height: 1.24; }
+.problem-list li { text-transform: none; }
+.brand-institutional {
+  background: var(--dark-blue) !important;
+  color: var(--white);
+  padding-bottom: 0 !important;
+}
+.brand-institutional::before { opacity: .28; }
+.brand-institutional .eyebrow { color: rgba(255,255,255,.78); }
+.brand-institutional .body-copy { color: rgba(255,255,255,.78) !important; line-height: 1.5; }
+.brand-area-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 54px;
+}
+.brand-area-card {
+  min-height: 540px;
+  border: 1px solid rgba(255,255,255,.14) !important;
+}
+.brand-area-card .area-number { display: none !important; }
+.brand-area-card .area-content {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  z-index: 2;
+}
+.brand-area-card h3 {
+  font-size: clamp(28px, 2.6vw, 48px);
+  line-height: .92;
+  margin-bottom: 12px;
+}
+.brand-area-card p {
+  color: rgba(255,255,255,.78);
+  margin: 0;
+  line-height: 1.42;
+}
+.brand-marquee {
+  margin-top: 64px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.14);
+  background: var(--dark-blue);
+  color: rgba(255,255,255,.64);
+  white-space: nowrap;
+}
+.brand-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  min-width: 200%;
+  animation: marquee 24s linear infinite;
+  font-family: var(--title);
+  font-size: clamp(34px, 4vw, 72px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+}
+.founders-section { background: var(--off); }
+.founder-info p {
+  margin: 10px 0 0;
+  color: rgba(8,8,8,.62);
+  line-height: 1.42;
+}
+.portfolio .portfolio-eyebrow,
+.portfolio .title,
+.portfolio .body-copy { color: var(--yellow) !important; }
+.portfolio-head { align-items: end; }
+.portfolio-actions-top {
+  justify-content: flex-end;
+  margin: -4px 0 18px;
+}
+.carousel-shell { overflow: visible; }
+.portfolio-track {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+.portfolio-track:active { cursor: grabbing; }
+.project-card {
+  min-height: 620px !important;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+.project-card figure { min-height: 430px !important; }
+.project-card img { filter: none !important; }
+.project-meta small {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: rgba(255,255,255,.58) !important;
+  white-space: nowrap;
+}
+.project-meta h3 { font-size: clamp(25px, 2vw, 38px) !important; }
+.project-tag {
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  left: 16px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--black);
+  box-shadow: 0 8px 26px rgba(0,0,0,.18);
+}
+.tag-promocional { background: var(--pink); color: #fff; }
+.tag-comercial { background: var(--yellow); color: var(--black); }
+.tag-corporativo { background: var(--blue); color: #fff; }
+.proof-title { text-transform: uppercase; }
+.different-word {
+  display: inline-block;
+  animation: differentFont 4s infinite steps(1);
+}
+@keyframes differentFont {
+  0%, 100% { font-family: var(--title); transform: skew(0); }
+  20% { font-family: var(--body); font-weight: 900; letter-spacing: -.06em; transform: rotate(-1deg); }
+  40% { font-family: var(--title); font-style: italic; transform: skew(-8deg); color: var(--pink); }
+  60% { font-family: var(--body); font-weight: 500; text-transform: lowercase; color: var(--blue); }
+  80% { font-family: var(--title); letter-spacing: .02em; color: var(--yellow); }
+}
+.video-proof.no-outline,
+.video-proof.no-outline video {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.video-proof.no-outline { border-radius: var(--radius); overflow: hidden; }
+.proof .quote-card {
+  padding: 22px 24px;
+  gap: 16px;
+}
+.proof .quote-card p {
+  font-size: clamp(17px, 1.22vw, 22px) !important;
+  line-height: 1.35 !important;
+  margin: 0;
+}
+.person-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.person-line img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+  border: 2px solid rgba(255,255,255,.85);
+}
+.process-eyebrow { color: var(--blue) !important; }
+.timeline-horizontal {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(190px, 1fr));
+  gap: 12px;
+  margin-top: 46px;
+  position: relative;
+}
+.timeline-horizontal::before {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 32px;
+  height: 2px;
+  background: rgba(8,8,8,.18);
+}
+.timeline-card {
+  position: relative;
+  z-index: 1;
+  background: #fbfaf7;
+  border: 1px solid rgba(8,8,8,.14);
+  border-radius: 24px;
+  padding: 24px 20px 26px;
+  min-height: 250px;
+}
+.timeline-card::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background: var(--step-color);
+  border: 4px solid var(--off);
+  border-radius: 999px;
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  box-shadow: 0 0 0 1px rgba(8,8,8,.12);
+}
+.timeline-card span {
+  display: block;
+  font-family: var(--title);
+  font-size: 58px;
+  line-height: .8;
+  color: var(--step-color);
+  margin: 34px 0 20px;
+}
+.timeline-card h3 { margin: 0 0 12px; font-size: 26px; line-height: .95; }
+.timeline-card p { margin: 0; color: rgba(8,8,8,.64); line-height: 1.38; }
+.objection-grid-simple {
+  grid-template-columns: minmax(0, .78fr) minmax(360px, .9fr) !important;
+  align-items: start !important;
+  margin-top: 0 !important;
+}
+.objection-heading { display: block !important; }
+.objection-heading .title { max-width: 760px; }
+.form-section { background: #e8e4dc !important; }
+.form-wrap-clean {
+  grid-template-columns: minmax(0, .86fr) minmax(390px, .74fr) !important;
+  align-items: center !important;
+}
+.contact-eyebrow { color: var(--green) !important; }
+.form-box {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.btn-instagram {
+  background: var(--pink) !important;
+  border-color: var(--pink) !important;
+  color: #fff !important;
+}
+.btn-instagram:hover {
+  background: var(--black) !important;
+  border-color: var(--black) !important;
+  color: #fff !important;
+}
+.feed-tile {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.footer-logo {
+  height: 30px !important;
+}
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+}
+.project-lightbox.is-open { display: block; }
+.project-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(8px);
+}
+.project-lightbox-panel {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100vw - 36px));
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  margin: 18px auto;
+  background: #f5f2eb;
+  color: var(--black);
+  border-radius: 28px;
+  padding: clamp(18px, 3vw, 34px);
+}
+.project-lightbox-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--black);
+  color: #fff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+.project-lightbox-head span {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--blue);
+}
+.project-lightbox-head h3 {
+  font-family: var(--title);
+  font-size: clamp(42px, 7vw, 92px);
+  line-height: .82;
+  margin: 12px 0 4px;
+}
+.project-lightbox-head p { margin: 0 0 24px; color: rgba(8,8,8,.58); }
+.project-lightbox-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.project-lightbox-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  display: block;
+  background: #ddd;
+}
+.project-lightbox-desc {
+  font-size: 20px;
+  line-height: 1.35;
+  max-width: 760px;
+  margin: 24px 0 0;
+}
+@media (max-width: 1100px) {
+  .brand-area-grid { grid-template-columns: 1fr; }
+  .brand-area-card { min-height: 460px; }
+  .timeline-horizontal {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 14px;
+  }
+  .timeline-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    min-height: 230px;
+  }
+  .timeline-horizontal::before { display: none; }
+  .project-lightbox-gallery { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .hero-copy { display: none !important; }
+  .hero-project-motion {
+    position: absolute !important;
+    inset: 130px 0 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: auto !important;
+    z-index: 0 !important;
+    opacity: .72 !important;
+  }
+  .project-motion-stack {
+    width: 100vw !important;
+    height: 560px !important;
+  }
+  .problem .tight-title { font-size: clamp(50px, 13vw, 78px) !important; }
+  .problem-panel { padding: 24px !important; }
+  .brand-institutional { padding-bottom: 0 !important; }
+  .brand-area-grid { margin-top: 34px; gap: 14px; }
+  .brand-area-card { min-height: 420px; }
+  .brand-marquee { margin-top: 38px; }
+  .brand-marquee-track { font-size: 34px; padding: 18px 0; }
+  .portfolio-head { gap: 18px; }
+  .portfolio-actions-top { justify-content: flex-start; margin: 8px 0 14px; }
+  .portfolio-track {
+    overflow-x: auto !important;
+    grid-auto-columns: minmax(285px, 86vw) !important;
+  }
+  .project-card { min-height: 540px !important; }
+  .project-card figure { min-height: 360px !important; }
+  .proof-grid { grid-template-columns: 1fr !important; }
+  .proof .quotes { grid-template-columns: 1fr !important; }
+  .proof .quote-card { min-height: auto; }
+  .person-line img { width: 48px; height: 48px; }
+  .objection-grid-simple { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .form-wrap-clean { display: grid !important; grid-template-columns: 1fr !important; }
+  .form-box { order: initial !important; }
+  .feed-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .feed-tile { flex: 0 0 74%; scroll-snap-align: start; }
+  .project-lightbox-panel { width: calc(100vw - 20px); margin: 10px auto; max-height: calc(100vh - 20px); border-radius: 22px; }
+}
+
+
+/* =========================================================
+   ROUND 2 — ajustes cliente Epicore
+   ========================================================= */
+:root {
+  --orange: #ed6c1e;
+  --pink: #ec559a;
+  --green: #51c535;
+  --blue: #0870ee;
+  --red: #f13a28;
+  --yellow: #ffd928;
+  --dark-blue: #050b45;
+}
+
+/* CTAs e menu */
+.btn-wa {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+  color: var(--black) !important;
+  text-transform: uppercase !important;
+}
+.btn-wa:hover {
+  background: var(--yellow) !important;
+  border-color: var(--yellow) !important;
+  color: var(--black) !important;
+}
+.topbar-nav a:hover { color: var(--green) !important; opacity: 1 !important; }
+
+/* Hero */
+.marker::after {
+  background: var(--yellow) !important;
+  box-shadow: 0 0 22px rgba(255,217,40,.58), 0 0 42px rgba(255,217,40,.30);
+}
+.hero-bg-slide {
+  filter: saturate(1) contrast(1.04) brightness(.62) !important;
+}
+.project-motion-stack img {
+  filter: saturate(1) contrast(1.04) brightness(.86) !important;
+}
+.tag:hover {
+  border-color: rgba(255,217,40,.78) !important;
+  background: rgba(255,217,40,.10) !important;
+  box-shadow: 0 0 24px rgba(255,217,40,.36), inset 0 0 18px rgba(255,255,255,.08) !important;
+}
+.target-sep {
+  border-color: var(--white) !important;
+  box-shadow: inset 0 0 0 3px var(--black), inset 0 0 0 6px var(--white) !important;
+}
+
+/* Problema */
+.problem-list li::before {
+  border: 0 !important;
+  background: var(--pink) !important;
+  box-shadow: none !important;
+}
+.problem-panel {
+  background: var(--blue) !important;
+}
+
+/* Institucional + áreas */
+.brand-institutional {
+  background: var(--blue) !important;
+}
+.brand-institutional::before { opacity: .15 !important; }
+.brand-area-grid { display: none !important; }
+.brand-area-split {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(360px, .72fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  margin-top: 54px;
+}
+.brand-area-visuals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.brand-area-card {
+  min-height: 500px !important;
+  border: 0 !important;
+}
+.brand-area-card::before {
+  opacity: .72 !important;
+  mix-blend-mode: multiply !important;
+}
+.brand-area-card.brand-area-green { --overlay: rgba(81,197,53,.72); }
+.brand-area-card.brand-area-yellow { --overlay: rgba(255,217,40,.72); }
+.brand-area-card.brand-area-pink { --overlay: rgba(236,85,154,.72); }
+.brand-area-card:hover::before { opacity: .36 !important; }
+.brand-area-card img { filter: saturate(1) contrast(1.04) brightness(.95) !important; }
+.brand-area-copy .eyebrow {
+  color: rgba(255,255,255,.86) !important;
+}
+.brand-area-copy .title {
+  color: #fff !important;
+  margin-bottom: 18px;
+}
+.brand-area-copy .body-copy {
+  max-width: 500px;
+  margin-bottom: 26px;
+}
+.brand-marquee {
+  display: none !important;
+}
+
+/* Fundadores: chamada de lado e cards do outro */
+.founders-section .container {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(440px, 1fr);
+  gap: clamp(30px, 5vw, 78px);
+  align-items: center;
+}
+.founders-section .section-head {
+  display: block !important;
+  margin: 0 !important;
+}
+.founders-section .section-head .body-copy {
+  margin-top: 22px;
+}
+.founder-cards {
+  margin: 0 !important;
+}
+
+/* Portfólio */
+.portfolio .portfolio-eyebrow,
+.portfolio .body-copy {
+  color: var(--yellow) !important;
+}
+.portfolio .title {
+  color: var(--white) !important;
+}
+.project-card {
+  width: 100%;
+  height: 620px !important;
+  min-height: 620px !important;
+}
+.project-card figure {
+  min-height: 430px !important;
+  height: 430px !important;
+}
+.project-card img {
+  filter: grayscale(1) saturate(0) contrast(1.08) brightness(.82) !important;
+}
+.project-card:hover img {
+  filter: grayscale(0) saturate(1) contrast(1.04) brightness(.95) !important;
+}
+.project-card[data-title="Pipocas Felippe"] figure,
+.project-card[data-title="Pipocas Felippe"] img {
+  height: 430px !important;
+  min-height: 430px !important;
+}
+.project-card[data-title="Pipocas Felippe"] img {
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Prova social */
+.different-word {
+  animation: none !important;
+  font-family: var(--title) !important;
+  font-style: normal !important;
+  color: var(--pink) !important;
+  transform: none !important;
+}
+.proof .quote-card p {
+  letter-spacing: .012em !important;
+  line-height: 1.48 !important;
+}
+.proof .quote-card {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Objeções */
+.objection-grid-simple {
+  align-items: start !important;
+}
+.accordion {
+  align-self: start !important;
+}
+
+/* Contato */
+.form-section {
+  padding-bottom: 86px !important;
+}
+.form-wrap-clean {
+  align-items: center !important;
+}
+.form-box {
+  transform: translateY(-18px);
+}
+.contact-eyebrow { color: var(--green) !important; }
+
+/* Instagram */
+.explore .eyebrow {
+  color: var(--pink) !important;
+}
+.btn-instagram {
+  background: var(--pink) !important;
+  border-color: var(--pink) !important;
+}
+.feed-tile {
+  border: 0 !important;
+}
+
+/* Rodapé */
+.footer-logo {
+  height: 38px !important;
+}
+.footer p {
+  letter-spacing: .01em;
+}
+
+@media (max-width: 1100px) {
+  .brand-area-split {
+    grid-template-columns: 1fr;
+  }
+  .brand-area-visuals {
+    grid-template-columns: 1fr;
+  }
+  .brand-area-card {
+    min-height: 440px !important;
+  }
+  .founders-section .container {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    height: 560px !important;
+    min-height: 560px !important;
+  }
+  .project-card figure,
+  .project-card[data-title="Pipocas Felippe"] figure,
+  .project-card[data-title="Pipocas Felippe"] img {
+    height: 360px !important;
+    min-height: 360px !important;
+  }
+  .form-box {
+    transform: none;
+  }
+}
+@media (max-width: 700px) {
+  .brand-area-split {
+    margin-top: 34px;
+    gap: 28px;
+  }
+  .brand-area-copy {
+    order: -1;
+  }
+  .brand-area-card {
+    min-height: 380px !important;
+  }
+  .founders-section .section-head {
+    margin-bottom: 24px !important;
+  }
+  .project-card {
+    height: 540px !important;
+    min-height: 540px !important;
+  }
+  .project-card figure,
+  .project-card[data-title="Pipocas Felippe"] figure,
+  .project-card[data-title="Pipocas Felippe"] img {
+    height: 350px !important;
+    min-height: 350px !important;
+  }
+  .proof .quote-card p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+  .form-section {
+    padding-bottom: 72px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 3 — CLIENTE EPICORE — FORCE PATCH
+   ========================================================= */
+:root {
+  --orange: #ed6c1e;
+  --pink: #ec559a;
+  --green: #51c535;
+  --blue: #0870ee;
+  --red: #f13a28;
+  --yellow: #ffd928;
+}
+
+/* Hero */
+.hero-title .marker::after,
+.marker::after {
+  background: var(--blue) !important;
+}
+.hero-left {
+  gap: 0 !important;
+}
+.hero-title {
+  margin-bottom: 30px !important;
+}
+.hero .tags {
+  margin-top: 10px !important;
+  margin-bottom: 34px !important;
+  gap: 14px !important;
+}
+.hero-left .btn-wa-hero {
+  margin-top: 0 !important;
+}
+.project-motion-stack img {
+  filter: none !important;
+}
+
+/* Institucional + áreas */
+.brand-institutional {
+  background: #061b4a !important;
+  padding-bottom: clamp(72px, 7vw, 118px) !important;
+}
+.brand-area-split {
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .62fr) !important;
+  gap: clamp(24px, 4vw, 56px) !important;
+  align-items: center !important;
+  margin-top: 44px !important;
+  margin-bottom: 44px !important;
+}
+.brand-area-visuals {
+  gap: 12px !important;
+}
+.brand-area-card {
+  min-height: 390px !important;
+  max-height: 430px !important;
+}
+.brand-area-card figure,
+.brand-area-card img {
+  min-height: 0 !important;
+}
+.brand-area-card .area-content {
+  padding: 20px !important;
+}
+.brand-area-card .area-content h3 {
+  font-size: clamp(21px, 1.85vw, 32px) !important;
+  line-height: .96 !important;
+}
+.brand-area-card .area-content p {
+  font-size: 14px !important;
+  line-height: 1.34 !important;
+}
+.brand-area-copy {
+  justify-self: end !important;
+  max-width: 450px !important;
+}
+.brand-area-copy .title {
+  font-size: clamp(42px, 5.1vw, 88px) !important;
+}
+.brand-area-copy .body-copy {
+  font-size: 17px !important;
+  line-height: 1.46 !important;
+}
+
+/* Fundadores */
+.founder-card {
+  box-shadow: 0 24px 54px rgba(0,0,0,.18) !important;
+}
+.founder-info,
+.founder-card-body {
+  padding: 30px 34px 28px !important;
+}
+.founder-info strong,
+.founder-card h3 {
+  display: block !important;
+  margin-bottom: 18px !important;
+  line-height: 1.04 !important;
+}
+.founder-info span,
+.founder-card .role {
+  display: block !important;
+  text-transform: uppercase !important;
+  letter-spacing: .09em !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  margin-bottom: 10px !important;
+  color: rgba(8,8,8,.62) !important;
+}
+.founder-info p {
+  margin-top: 8px !important;
+  line-height: 1.42 !important;
+}
+
+/* Portfólio */
+.portfolio .portfolio-eyebrow,
+.portfolio .section-head .body-copy {
+  color: var(--yellow) !important;
+}
+.portfolio .section-head .title {
+  color: var(--white) !important;
+}
+.portfolio-track {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.portfolio-track::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.project-card {
+  height: 620px !important;
+  min-height: 620px !important;
+}
+.project-card figure {
+  height: 430px !important;
+  min-height: 430px !important;
+}
+.project-card img {
+  filter: grayscale(1) saturate(0) contrast(1.05) brightness(.82) !important;
+}
+.project-card:hover img {
+  filter: none !important;
+}
+.project-card:has(img[data-img*="pipocas"]) figure,
+.project-card[data-title*="Pipocas"] figure {
+  height: 430px !important;
+  min-height: 430px !important;
+}
+.project-card:has(img[data-img*="pipocas"]) img,
+.project-card[data-title*="Pipocas"] img {
+  object-fit: cover !important;
+}
+
+/* Prova social */
+.proof .eyebrow,
+.proof .section-head .body-copy {
+  color: var(--pink) !important;
+}
+.proof-title .different-word,
+.different-word {
+  animation: none !important;
+  color: var(--pink) !important;
+  font-family: var(--title) !important;
+  font-style: normal !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  transform: none !important;
+}
+.proof .quote-card p {
+  letter-spacing: .01em !important;
+  line-height: 1.52 !important;
+  font-size: clamp(16px, 1.08vw, 20px) !important;
+}
+.proof-caption span,
+.quote-card span {
+  letter-spacing: .12em !important;
+}
+
+/* Objeções */
+.objections .acc-item {
+  display: block !important;
+}
+.objections .acc-item:nth-child(2) {
+  display: block !important;
+}
+
+/* Contato */
+.form-section {
+  padding-bottom: clamp(80px, 8vw, 140px) !important;
+}
+.form-wrap {
+  align-items: center !important;
+}
+.form-box {
+  transform: translateY(-18px) !important;
+}
+.form-section .eyebrow {
+  color: var(--green) !important;
+}
+
+/* Explore */
+.explore .eyebrow {
+  color: var(--pink) !important;
+}
+.explore .btn,
+.explore .btn-outline {
+  background: var(--pink) !important;
+  border-color: var(--pink) !important;
+  color: #fff !important;
+}
+.feed-tile {
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+/* Footer */
+.footer-logo {
+  height: 30px !important;
+}
+.footer p {
+  text-transform: none !important;
+}
+
+@media (max-width: 1100px) {
+  .hero-title {
+    margin-bottom: 26px !important;
+  }
+  .hero .tags {
+    margin-top: 8px !important;
+    margin-bottom: 32px !important;
+    gap: 12px !important;
+  }
+  .project-motion-stack {
+    width: min(420px, 90vw) !important;
+    height: min(420px, 90vw) !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+  .brand-institutional {
+    padding-bottom: 76px !important;
+  }
+  .brand-area-split {
+    grid-template-columns: 1fr !important;
+    margin-bottom: 42px !important;
+  }
+  .brand-area-visuals {
+    grid-template-columns: 1fr !important;
+  }
+  .brand-area-card {
+    min-height: 340px !important;
+    max-height: none !important;
+  }
+  .brand-area-copy {
+    justify-self: start !important;
+    max-width: none !important;
+  }
+  .founders-section .container {
+    grid-template-columns: 1fr !important;
+  }
+  .founder-info,
+  .founder-card-body {
+    padding: 28px 30px 26px !important;
+  }
+  .portfolio-track {
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+  .project-card,
+  .project-card[data-title*="Pipocas"] {
+    height: 540px !important;
+    min-height: 540px !important;
+  }
+  .project-card figure,
+  .project-card[data-title*="Pipocas"] figure {
+    height: 360px !important;
+    min-height: 360px !important;
+  }
+  .form-box {
+    transform: none !important;
+  }
+  .form-section {
+    padding-bottom: 92px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-title {
+    margin-bottom: 24px !important;
+  }
+  .hero .tags {
+    margin-top: 10px !important;
+    margin-bottom: 32px !important;
+  }
+  .project-motion-stack {
+    width: min(360px, 88vw) !important;
+    height: min(360px, 88vw) !important;
+  }
+  .brand-area-card .area-content h3 {
+    font-size: 24px !important;
+  }
+  .brand-area-card .area-content p {
+    font-size: 14px !important;
+  }
+  .brand-institutional {
+    padding-bottom: 84px !important;
+  }
+  .founder-info strong {
+    margin-bottom: 16px !important;
+  }
+  .proof .quote-card p {
+    font-size: 16px !important;
+    line-height: 1.48 !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 4 — CLIENTE EPICORE — FORCE PATCH
+   ========================================================= */
+
+/* Menu: hover azul da marca */
+.topbar-nav a:hover {
+  color: var(--blue) !important;
+  opacity: 1 !important;
+}
+
+/* Risco/underline: azul, sem brilho amarelo */
+.hero-title .marker::after,
+.marker::after {
+  background: var(--blue) !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Cards/caixinhas da área institucional: alternar amarelo, rosa, laranja */
+.brand-area-visuals .brand-area-card:nth-child(1),
+.brand-area-card.brand-area-green {
+  --overlay: rgba(255,217,40,.74) !important;
+}
+.brand-area-visuals .brand-area-card:nth-child(2),
+.brand-area-card.brand-area-yellow {
+  --overlay: rgba(236,85,154,.74) !important;
+}
+.brand-area-visuals .brand-area-card:nth-child(3),
+.brand-area-card.brand-area-pink {
+  --overlay: rgba(237,108,30,.74) !important;
+}
+
+/* Fundadores: responsabilidades menores */
+.founder-info p,
+.founder-card-body p {
+  font-size: 14px !important;
+  line-height: 1.42 !important;
+  letter-spacing: .01em !important;
+  color: rgba(8,8,8,.58) !important;
+}
+
+/* Mobile/tablet: slider de projetos mais quadrado, com bordas arredondadas e respiro da faixa inferior */
+@media (max-width: 1100px) {
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    align-items: center !important;
+    justify-content: center !important;
+    padding-bottom: 44px !important;
+    margin-bottom: 18px !important;
+  }
+  .project-motion-stack {
+    width: min(400px, 84vw) !important;
+    height: min(400px, 84vw) !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 26px !important;
+    overflow: hidden !important;
+    align-self: center !important;
+    box-shadow: 0 24px 60px rgba(0,0,0,.20) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    padding-bottom: 38px !important;
+    margin-bottom: 16px !important;
+  }
+  .project-motion-stack {
+    width: min(336px, 84vw) !important;
+    height: min(336px, 84vw) !important;
+    border-radius: 24px !important;
+  }
+  .founder-info p,
+  .founder-card-body p {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 5 — HOVER TAGS HERO — EPICORE
+   ========================================================= */
+
+/* As três tags do topo seguem cores próprias no hover */
+.hero .tags .tag:nth-child(1):hover,
+.hero .tags .tag:nth-child(1):focus-visible {
+  border-color: var(--yellow) !important;
+  background: rgba(255,217,40,.12) !important;
+  color: var(--white) !important;
+  box-shadow:
+    0 0 22px rgba(255,217,40,.46),
+    0 0 44px rgba(255,217,40,.24),
+    inset 0 0 18px rgba(255,217,40,.10) !important;
+}
+
+.hero .tags .tag:nth-child(2):hover,
+.hero .tags .tag:nth-child(2):focus-visible {
+  border-color: var(--pink) !important;
+  background: rgba(236,85,154,.13) !important;
+  color: var(--white) !important;
+  box-shadow:
+    0 0 22px rgba(236,85,154,.48),
+    0 0 44px rgba(236,85,154,.24),
+    inset 0 0 18px rgba(236,85,154,.10) !important;
+}
+
+.hero .tags .tag:nth-child(3):hover,
+.hero .tags .tag:nth-child(3):focus-visible {
+  border-color: var(--orange) !important;
+  background: rgba(237,108,30,.13) !important;
+  color: var(--white) !important;
+  box-shadow:
+    0 0 22px rgba(237,108,30,.48),
+    0 0 44px rgba(237,108,30,.24),
+    inset 0 0 18px rgba(237,108,30,.10) !important;
+}
+
+
+/* =========================================================
+   ROUND 6 — HERO MOBILE SLIDE WIDE — EPICORE
+   ========================================================= */
+@media (max-width: 700px) {
+  .hero {
+    padding-bottom: 12px !important;
+  }
+
+  .hero-left {
+    gap: 0 !important;
+  }
+
+  .hero .tags {
+    margin-bottom: 18px !important;
+  }
+
+  .hero-left .btn-wa-hero,
+  .hero .btn-wa-hero {
+    margin-bottom: 16px !important;
+  }
+
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    padding-bottom: 18px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .project-motion-stack {
+    width: min(520px, 88vw) !important;
+    height: auto !important;
+    aspect-ratio: 16 / 11 !important;
+    border-radius: 22px !important;
+    align-self: center !important;
+  }
+
+  .hero + .marquee,
+  .hero-marquee,
+  .marquee:first-of-type {
+    margin-top: 0 !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    padding-bottom: 24px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .project-motion-stack {
+    width: min(620px, 78vw) !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 26px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 7 — FUNDADORES ESPAÇAMENTO — EPICORE
+   ========================================================= */
+.founder-info strong,
+.founder-card h3 {
+  margin-bottom: 8px !important;
+}
+
+.founder-info span,
+.founder-card .role {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+@media (max-width: 700px) {
+  .founder-info strong,
+  .founder-card h3 {
+    margin-bottom: 7px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 8 — HERO MOBILE ESPAÇAMENTO FINAL — EPICORE
+   ========================================================= */
+@media (max-width: 700px) {
+  .hero {
+    padding-bottom: 0 !important;
+  }
+
+  .hero-left .btn-wa-hero,
+  .hero .btn-wa-hero {
+    margin-bottom: 6px !important;
+  }
+
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    padding-top: 0 !important;
+    padding-bottom: 2px !important;
+    margin-top: -8px !important;
+    margin-bottom: -6px !important;
+  }
+
+  .project-motion-stack {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero + .marquee,
+  .hero-marquee,
+  .marquee:first-of-type {
+    margin-top: -8px !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .hero-left .btn-wa-hero,
+  .hero .btn-wa-hero {
+    margin-bottom: 8px !important;
+  }
+
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    padding-bottom: 6px !important;
+    margin-top: -4px !important;
+    margin-bottom: -4px !important;
+  }
+
+  .hero + .marquee,
+  .hero-marquee,
+  .marquee:first-of-type {
+    margin-top: -6px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 9 — AJUSTES FINAIS — EPICORE
+   ========================================================= */
+
+/* Palavra FUNDADORES no vermelho da marca */
+.founders-section .eyebrow {
+  color: var(--red) !important;
+}
+
+/* Hover vermelho no nome dos fundadores */
+.founder-info strong,
+.founder-card h3 {
+  transition: color .28s ease !important;
+}
+.founder-card:hover .founder-info strong,
+.founder-card:hover h3,
+.founder-info strong:hover,
+.founder-card h3:hover {
+  color: var(--red) !important;
+}
+
+/* Mobile: diminuir ainda mais o espaçamento entre botão, slider e faixa */
+@media (max-width: 700px) {
+  .hero {
+    padding-bottom: 0 !important;
+  }
+
+  .hero-left .btn-wa-hero,
+  .hero .btn-wa-hero {
+    margin-bottom: 0 !important;
+  }
+
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: -18px !important;
+    margin-bottom: -18px !important;
+  }
+
+  .project-motion-stack {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero + .marquee,
+  .hero-marquee,
+  .marquee:first-of-type {
+    margin-top: -18px !important;
+  }
+}
+
+
+/* ROUND 10 — ajuste card 05 do processo */
+.timeline-card:last-child h3 { font-size: 22px !important; line-height: 1.02 !important; }
+@media (max-width: 700px) { .timeline-card:last-child h3 { font-size: 20px !important; } }
+
+
+/* =========================================================
+   ROUND 11 — PROCESSO: TÍTULOS COM MESMO TAMANHO
+   ========================================================= */
+.timeline-card h3 {
+  font-size: 22px !important;
+  line-height: 1.02 !important;
+}
+
+@media (max-width: 700px) {
+  .timeline-card h3 {
+    font-size: 20px !important;
+    line-height: 1.02 !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 12 — ASSETS ATUALIZADOS
+   ========================================================= */
+.motion-mobile { display: none; }
+.motion-desktop { display: block; }
+.project-motion-stack img {
+  animation-duration: 21s !important;
+}
+.project-motion-stack img:nth-child(1) { animation-delay: 0s; }
+.project-motion-stack img:nth-child(2) { animation-delay: 3s; }
+.project-motion-stack img:nth-child(3) { animation-delay: 6s; }
+.project-motion-stack img:nth-child(4) { animation-delay: 9s; }
+.project-motion-stack img:nth-child(5) { animation-delay: 12s; }
+.project-motion-stack img:nth-child(6) { animation-delay: 15s; }
+.project-motion-stack img:nth-child(7) { animation-delay: 18s; }
+.video-proof video {
+  aspect-ratio: 16 / 9 !important;
+  max-height: none !important;
+  object-fit: cover !important;
+}
+.proof-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr) !important;
+  align-items: start !important;
+}
+@media (max-width: 700px) {
+  .motion-desktop { display: none !important; }
+  .motion-mobile { display: block !important; }
+  .project-motion-stack {
+    aspect-ratio: 16 / 10.4 !important;
+  }
+  .video-proof video {
+    aspect-ratio: 16 / 9 !important;
+  }
+  .proof-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 13 — ALTERAÇÕES II
+   ========================================================= */
+
+/* Menu: permite rótulos maiores sem quebrar a barra */
+.nav {
+  gap: clamp(20px, 2.2vw, 38px) !important;
+}
+.nav a {
+  white-space: nowrap;
+}
+
+/* Faixa animada: espaçamento padronizado entre textos e símbolo */
+.marquee-track {
+  gap: 0 !important;
+}
+.marquee-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: clamp(22px, 2.5vw, 42px) !important;
+  padding-inline: clamp(11px, 1.25vw, 21px) !important;
+}
+.target-sep {
+  flex: 0 0 auto;
+  margin: 0 !important;
+}
+
+/* Lista azul: ícones de erro em X vermelho */
+.problem-list li {
+  position: relative;
+  padding-left: 48px !important;
+}
+.problem-list li::before {
+  content: "×" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 7px !important;
+  transform: translateY(-50%) !important;
+  background: #e21b1b !important;
+  color: #ffffff !important;
+  display: grid !important;
+  place-items: center !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 32px !important;
+  line-height: 24px !important;
+  font-weight: 900 !important;
+}
+
+/* Segmentos: manter apenas os títulos */
+.brand-area-card p {
+  display: none !important;
+}
+.brand-area-card .area-content {
+  bottom: 30px !important;
+}
+.brand-area-card h3 {
+  margin-bottom: 0 !important;
+}
+
+/* Ajuste de alinhamento entre texto superior e bloco de áreas */
+.brand-area-split {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr) !important;
+  align-items: stretch !important;
+  gap: clamp(28px, 4vw, 68px) !important;
+}
+.brand-area-copy {
+  align-self: center !important;
+  padding-top: 0 !important;
+}
+.brand-area-copy .body-copy strong {
+  font-weight: 850 !important;
+  color: inherit !important;
+}
+
+/* Fundadores: azul, dando continuidade ao fundo anterior */
+.founders-section {
+  background: var(--dark-blue) !important;
+  color: var(--white) !important;
+  padding-top: clamp(72px, 8vw, 128px) !important;
+}
+.founders-section .eyebrow {
+  color: rgba(255,255,255,.74) !important;
+}
+.founders-section .title,
+.founders-section .founder-info h3 {
+  color: var(--white) !important;
+}
+.founders-section .body-copy,
+.founders-section .founder-info p,
+.founders-section .founder-info small {
+  color: rgba(255,255,255,.72) !important;
+}
+.founder-card {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+.founder-card .founder-info {
+  background: rgba(0,0,0,.22) !important;
+}
+
+/* Portfólio: arrastável com mouse */
+.portfolio-track {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  scroll-behavior: smooth;
+}
+.portfolio-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
+}
+/* Processo: cores todas azuis conforme a primeira */
+.timeline-step::before,
+.timeline-step .step-dot,
+.timeline-step .step-number,
+.timeline-card .step-number,
+.timeline-card .step-dot {
+  color: var(--blue) !important;
+  border-color: var(--blue) !important;
+  background: var(--blue) !important;
+}
+.timeline-card,
+.timeline-step {
+  --step-color: var(--blue) !important;
+}
+.timeline-card:nth-child(1),
+.timeline-card:nth-child(2),
+.timeline-card:nth-child(3),
+.timeline-card:nth-child(4),
+.timeline-card:nth-child(5),
+.timeline-step:nth-child(1),
+.timeline-step:nth-child(2),
+.timeline-step:nth-child(3),
+.timeline-step:nth-child(4),
+.timeline-step:nth-child(5) {
+  --accent: var(--blue) !important;
+  --step-color: var(--blue) !important;
+}
+.timeline-card .number,
+.timeline-card .card-number,
+.timeline-card h3::before {
+  color: var(--blue) !important;
+}
+
+/* Formulário */
+.form-note {
+  margin-top: 14px !important;
+  text-align: left !important;
+  font-size: 13px !important;
+  color: rgba(8,8,8,.62) !important;
+}
+input[type="tel"]::placeholder {
+  letter-spacing: .02em;
+}
+
+/* Mobile */
+@media (max-width: 920px) {
+  .brand-area-split {
+    grid-template-columns: 1fr !important;
+  }
+  .brand-area-copy {
+    align-self: start !important;
+  }
+}
+@media (max-width: 760px) {
+  .nav a {
+    font-size: 11px !important;
+  }
+  .topbar-inner {
+    gap: 10px !important;
+  }
+  .problem-list li {
+    padding-left: 42px !important;
+  }
+  .problem-list li::before {
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 29px !important;
+  }
+}
+
+
+/* ROUND 13 PATCH — menu real da topbar */
+.topbar-nav {
+  gap: clamp(18px, 2.05vw, 34px) !important;
+}
+.topbar-nav a {
+  white-space: nowrap !important;
+  font-size: clamp(11px, .82vw, 14px) !important;
+}
+@media (max-width: 900px) {
+  .topbar-nav {
+    gap: 13px !important;
+  }
+  .topbar-nav a {
+    font-size: 10px !important;
+    letter-spacing: .045em !important;
+  }
+}
+@media (max-width: 700px) {
+  .topbar-nav a[href="#posicionamento"] {
+    display: none !important;
+  }
+  .topbar-nav {
+    gap: 10px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 14 — CORREÇÕES
+   ========================================================= */
+
+/* Ícones de erro: vermelho da marca + itens em linha única */
+.problem-list li {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  font-size: clamp(17px, 1.45vw, 22px) !important;
+  line-height: 1.08 !important;
+}
+.problem-list li::before {
+  background: var(--red) !important;
+  border-color: var(--red) !important;
+  color: var(--white) !important;
+}
+
+/* Alinhamento entre bloco visual e bloco textual das áreas */
+.brand-area-split {
+  align-items: start !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(390px, .92fr) !important;
+}
+.brand-area-visuals,
+.brand-area-copy {
+  margin-top: 0 !important;
+}
+.brand-area-copy {
+  align-self: start !important;
+  padding-top: 0 !important;
+}
+.brand-area-copy .eyebrow {
+  display: block !important;
+  margin-top: 0 !important;
+}
+
+/* Fundadores: palavra em vermelho da marca */
+.founders-section .eyebrow,
+.founders-section .section-head .eyebrow {
+  color: var(--red) !important;
+}
+
+/* Fundadores: parte inferior do card branca e textos em cinza */
+.founder-card .founder-info {
+  background: var(--white) !important;
+  color: var(--black) !important;
+}
+.founder-card .founder-info h3 {
+  color: #2b2b2b !important;
+}
+.founder-card .founder-info small,
+.founder-card .founder-info p {
+  color: #777777 !important;
+}
+
+/* Portfólio: arraste mantém slider, clique normal abre modal */
+.portfolio-track {
+  cursor: grab !important;
+}
+.portfolio-track.is-dragging {
+  cursor: grabbing !important;
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
+}
+.portfolio-track.is-dragging .project-card {
+  pointer-events: auto !important;
+}
+
+/* Objeções: títulos em Area ExtraBold e em uma linha */
+.acc-trigger span {
+  font-family: var(--font, 'Area Normal'), 'Area Normal', Arial, sans-serif !important;
+  font-weight: 850 !important;
+  white-space: nowrap !important;
+  font-size: clamp(16px, 1.15vw, 22px) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.025em !important;
+}
+.acc-trigger {
+  gap: 18px !important;
+}
+.acc-trigger strong {
+  flex: 0 0 auto !important;
+}
+
+/* Responsivo: quando não couber, reduz sem quebrar a linha */
+@media (max-width: 900px) {
+  .problem-list li {
+    white-space: normal !important;
+  }
+  .brand-area-split {
+    grid-template-columns: 1fr !important;
+  }
+  .acc-trigger span {
+    font-size: clamp(14px, 3.45vw, 18px) !important;
+    white-space: normal !important;
+    line-height: 1.05 !important;
+  }
+}
+
+
+.founders-red-word {
+  color: var(--red) !important;
+}
+
+
+/* =========================================================
+   ROUND 15 — AJUSTE FINO LISTA DE PROBLEMAS
+   ========================================================= */
+.problem-list li {
+  font-size: clamp(15px, 1.18vw, 19px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.015em !important;
+}
+@media (max-width: 760px) {
+  .problem-list li {
+    font-size: clamp(14px, 3.6vw, 17px) !important;
+    line-height: 1.16 !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 16 — ALINHAMENTO TEXTOS ÁREAS
+   ========================================================= */
+@media (max-width: 920px) {
+  .brand-institutional .positioning-top .body-copy,
+  .brand-area-copy,
+  .brand-area-copy .eyebrow,
+  .brand-area-copy .title,
+  .brand-area-copy .body-copy {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .brand-institutional .positioning-top {
+    gap: 28px !important;
+  }
+
+  .brand-area-copy {
+    width: 100% !important;
+  }
+}
+
+
+
+/* =========================================================
+   ROUND 17 — FUNDADORES | CARGOS EM 1 LINHA
+   ========================================================= */
+.founder-info span,
+.founder-card .role {
+  font-size: 10.5px !important;
+  letter-spacing: .04em !important;
+  line-height: 1.15 !important;
+}
+
+@media (min-width: 701px) {
+  .founder-info span,
+  .founder-card .role {
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .founder-info span,
+  .founder-card .role {
+    font-size: 11px !important;
+    letter-spacing: .035em !important;
+    line-height: 1.18 !important;
+    white-space: normal !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 18 — POPUP/ÁLBUM DE PROJETOS
+   ========================================================= */
+.project-card,
+.project-card figure,
+.project-card img {
+  cursor: pointer !important;
+}
+.project-lightbox {
+  z-index: 99999 !important;
+}
+.project-lightbox.is-open {
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+.project-lightbox-gallery {
+  scroll-behavior: smooth;
+}
+.project-lightbox-gallery img {
+  cursor: default !important;
+}
+
+
+/* =========================================================
+   ROUND 19 — FOTO ABRE POPUP / TEXTO ARRASTA
+   ========================================================= */
+.project-card figure,
+.project-card figure img {
+  cursor: zoom-in !important;
+}
+
+.project-card .project-meta {
+  cursor: grab !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+.project-card .project-meta:active,
+.portfolio-track.is-dragging .project-meta {
+  cursor: grabbing !important;
+}
+
+.portfolio-track.is-dragging {
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
+}
+
+.project-lightbox {
+  z-index: 99999 !important;
+}
+.project-lightbox.is-open {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+
+/* =========================================================
+   ROUND 20 — AJUSTE TEXTO CARDS DE SEGMENTOS
+   ========================================================= */
+.brand-area-card .area-content {
+  left: clamp(16px, 1.6vw, 24px) !important;
+  right: clamp(30px, 2.6vw, 42px) !important;
+  bottom: clamp(24px, 2.2vw, 32px) !important;
+}
+
+.brand-area-card h3 {
+  font-size: clamp(24px, 2.15vw, 38px) !important;
+  line-height: .94 !important;
+  letter-spacing: -0.04em !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 920px) {
+  .brand-area-card .area-content {
+    left: 18px !important;
+    right: 32px !important;
+  }
+
+  .brand-area-card h3 {
+    font-size: clamp(25px, 7.2vw, 34px) !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 21 — MOBILE LISTA PROBLEMAS EM 1 LINHA
+   ========================================================= */
+@media (max-width: 700px) {
+  .problem-panel {
+    overflow: visible !important;
+  }
+
+  .problem-list {
+    width: 100% !important;
+    max-width: none !important;
+    display: grid !important;
+    gap: 14px !important;
+  }
+
+  .problem-list li {
+    width: 100% !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    font-size: clamp(13px, 3.25vw, 15px) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.03em !important;
+    padding-left: 42px !important;
+    display: block !important;
+  }
+
+  .problem-list li::before {
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 28px !important;
+    left: 0 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .problem-list li {
+    font-size: 12px !important;
+    letter-spacing: -0.045em !important;
+    padding-left: 38px !important;
+  }
+
+  .problem-list li::before {
+    width: 23px !important;
+    height: 23px !important;
+    font-size: 26px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 22 — CORREÇÕES PERSISTENTES MOBILE
+   ========================================================= */
+
+/* 1. Lista azul no mobile: força cada item inteiro em uma única linha */
+@media (max-width: 700px) {
+  .problem-panel {
+    padding-left: 24px !important;
+    padding-right: 20px !important;
+    overflow: visible !important;
+  }
+
+  .problem-list {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    display: grid !important;
+    gap: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .problem-list li {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding-left: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    font-size: clamp(10.5px, 2.62vw, 13px) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.055em !important;
+  }
+
+  .problem-list li::before {
+    position: static !important;
+    transform: none !important;
+    flex: 0 0 22px !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    font-size: 24px !important;
+    line-height: 20px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .problem-panel {
+    padding-left: 20px !important;
+    padding-right: 16px !important;
+  }
+
+  .problem-list li {
+    gap: 8px !important;
+    font-size: 9.8px !important;
+    letter-spacing: -0.07em !important;
+  }
+
+  .problem-list li::before {
+    flex-basis: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    font-size: 22px !important;
+  }
+}
+
+/* 2. Cards de áreas: diminui recuo do texto em relação à borda esquerda */
+.brand-area-card .area-content {
+  left: clamp(10px, 1.05vw, 18px) !important;
+  right: clamp(26px, 2.2vw, 38px) !important;
+}
+
+@media (max-width: 920px) {
+  .brand-area-card .area-content {
+    left: 12px !important;
+    right: 26px !important;
+  }
+
+  .brand-area-card h3 {
+    font-size: clamp(23px, 6.7vw, 32px) !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 23 — CORREÇÃO DEFINITIVA LISTA MOBILE + RECUO ÁREAS
+   ========================================================= */
+
+/* Lista da caixa azul: vale para mobile/tablet, não só abaixo de 700px */
+@media (max-width: 1100px) {
+  .problem-panel {
+    overflow: visible !important;
+  }
+
+  .problem-list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: none !important;
+    gap: 12px !important;
+    margin: 22px 0 28px !important;
+    padding: 0 !important;
+  }
+
+  .problem-list li {
+    display: grid !important;
+    grid-template-columns: 26px max-content !important;
+    align-items: center !important;
+    column-gap: 13px !important;
+    width: max-content !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    line-height: 1 !important;
+    font-size: clamp(14px, 2.35vw, 20px) !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .problem-list li > span {
+    display: block !important;
+    width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    line-height: 1 !important;
+  }
+
+  .problem-list li::before {
+    position: static !important;
+    transform: none !important;
+    grid-column: 1 !important;
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    margin: 0 !important;
+    font-size: 27px !important;
+    line-height: 22px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .problem-panel {
+    padding: 26px 22px 28px !important;
+  }
+
+  .problem-list {
+    gap: 11px !important;
+  }
+
+  .problem-list li {
+    grid-template-columns: 23px max-content !important;
+    column-gap: 10px !important;
+    font-size: clamp(11px, 3.05vw, 14px) !important;
+    letter-spacing: -0.055em !important;
+  }
+
+  .problem-list li::before {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    font-size: 24px !important;
+    line-height: 20px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .problem-panel {
+    padding-left: 18px !important;
+    padding-right: 14px !important;
+  }
+
+  .problem-list li {
+    grid-template-columns: 20px max-content !important;
+    column-gap: 8px !important;
+    font-size: 9.8px !important;
+    letter-spacing: -0.07em !important;
+  }
+
+  .problem-list li::before {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    font-size: 22px !important;
+    line-height: 18px !important;
+  }
+}
+
+/* Cards de Áreas de atuação: diminui o recuo do texto da borda esquerda */
+.brand-area-card .area-content {
+  left: 8px !important;
+  right: clamp(20px, 2vw, 32px) !important;
+}
+
+@media (max-width: 920px) {
+  .brand-area-card .area-content {
+    left: 10px !important;
+    right: 22px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 25 — TEXTO INSTITUCIONAL 10PX À ESQUERDA
+   ========================================================= */
+.brand-institutional .positioning-top > .body-copy {
+  transform: translateX(-10px) !important;
+}
+
+
+/* =========================================================
+   ROUND 26 — CORREÇÕES E ALTERAÇÕES
+   ========================================================= */
+
+/* Caixa da seção "Seu espaço comunica..." em grafite */
+.problem-panel {
+  background: #252525 !important;
+  border-color: #252525 !important;
+  color: var(--white) !important;
+  box-shadow: 16px 16px 0 rgba(8,8,8,.18) !important;
+}
+.problem-panel .lead,
+.problem-panel p,
+.problem-list li,
+.problem-list li > span {
+  color: var(--white) !important;
+}
+.problem-list li::before {
+  background: var(--red) !important;
+  border-color: var(--red) !important;
+  color: var(--white) !important;
+}
+
+/* Fundadores: "Fundadores" branco em todas as versões */
+.founders-section .eyebrow,
+.founders-section .section-head .eyebrow,
+.founders-red-word {
+  color: var(--white) !important;
+}
+
+/* Desktop: alinhar botão do WhatsApp da prova social com a coluna da Beatriz */
+.proof-cta-align {
+  margin-top: 28px !important;
+}
+@media (min-width: 901px) {
+  .proof-cta-align {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr) !important;
+    gap: 16px !important;
+    align-items: start !important;
+  }
+  .proof-cta-align .btn-wa {
+    grid-column: 2 !important;
+    justify-self: start !important;
+  }
+}
+
+/* Objeções: caixas expandem também no hover */
+.acc-item:hover .acc-content,
+.acc-item:focus-within .acc-content {
+  max-height: 460px !important;
+}
+.acc-item:hover {
+  background: rgba(255,255,255,.1) !important;
+}
+
+/* Pré-títulos sempre alinhados à esquerda com os títulos */
+.section-head,
+.section-head > div,
+.section-head .eyebrow,
+.section-head .title,
+.section-head .title-small,
+.eyebrow {
+  text-align: left !important;
+}
+.section-head .eyebrow,
+.eyebrow {
+  display: block !important;
+  margin-left: 0 !important;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  /* Margem lateral de 20px em toda a página */
+  :root {
+    --container: calc(100vw - 40px) !important;
+  }
+
+  .container,
+  .topbar-inner {
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .topbar {
+    left: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+    transform: none !important;
+  }
+
+  /* Hero: slide abaixo do botão, com espaço, sem ficar atrás de tags/botão */
+  .hero {
+    min-height: auto !important;
+    padding-top: 92px !important;
+    padding-bottom: 26px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    gap: 0 !important;
+    position: relative !important;
+    align-items: stretch !important;
+  }
+
+  .hero-left {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 3 !important;
+  }
+
+  .hero-left .btn-wa-hero,
+  .hero .btn-wa-hero {
+    margin-bottom: 0 !important;
+  }
+
+  .hero-project-motion,
+  .hero-motion.hero-project-motion {
+    order: 2 !important;
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 18px 0 0 !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    z-index: 1 !important;
+    transform: none !important;
+    pointer-events: none !important;
+    display: block !important;
+  }
+
+  .motion-desktop {
+    display: none !important;
+  }
+
+  .motion-mobile {
+    display: block !important;
+  }
+
+  .project-motion-stack {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10.4 !important;
+    border-radius: 22px !important;
+    margin: 0 auto !important;
+    align-self: stretch !important;
+  }
+
+  .hero + .marquee,
+  .hero-marquee,
+  .marquee:first-of-type {
+    margin-top: 18px !important;
+  }
+
+  /* Posicionamento: alinhar "A Epicore", título e texto */
+  .brand-institutional .positioning-top {
+    display: block !important;
+    text-align: left !important;
+  }
+
+  .brand-institutional .positioning-top > div,
+  .brand-institutional .positioning-top .eyebrow,
+  .brand-institutional .positioning-title,
+  .brand-institutional .positioning-top > .body-copy {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    transform: none !important;
+    text-align: left !important;
+    justify-self: start !important;
+  }
+
+  .brand-institutional .positioning-top > .body-copy {
+    max-width: 100% !important;
+    margin-top: 22px !important;
+  }
+
+  /* Pré-títulos e títulos à esquerda em todos os blocos mobile */
+  .section-head {
+    display: block !important;
+    text-align: left !important;
+  }
+
+  .section-head > div,
+  .section-head .eyebrow,
+  .section-head .title,
+  .section-head .title-small {
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    justify-self: start !important;
+  }
+
+  .proof-cta-align {
+    display: block !important;
+  }
+}
+
+
+.acc-item.is-hover-open .acc-content {
+  max-height: 460px !important;
+}
+
+
+/* =========================================================
+   ROUND 27 — ALINHAMENTO SEÇÃO A EPICORE / ÁREAS
+   ========================================================= */
+
+/* Desktop: compacta a coluna de título e sobe o bloco de cards + áreas,
+   seguindo a referência enviada. */
+@media (min-width: 901px) {
+  .brand-institutional {
+    padding-top: clamp(74px, 6.2vw, 104px) !important;
+  }
+
+  .brand-institutional .positioning-top {
+    grid-template-columns: minmax(0, .62fr) minmax(430px, .44fr) !important;
+    gap: clamp(34px, 5vw, 86px) !important;
+    align-items: start !important;
+  }
+
+  .brand-institutional .positioning-title {
+    font-size: clamp(76px, 6.35vw, 116px) !important;
+    line-height: .82 !important;
+    max-width: 8.8ch !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  .brand-institutional .positioning-top > .body-copy {
+    max-width: 430px !important;
+    margin-top: clamp(34px, 3.4vw, 60px) !important;
+    transform: translateX(-10px) !important;
+  }
+
+  .brand-area-split {
+    margin-top: clamp(34px, 4.2vw, 66px) !important;
+    grid-template-columns: minmax(0, .96fr) minmax(430px, .52fr) !important;
+    gap: clamp(56px, 7vw, 112px) !important;
+    align-items: start !important;
+  }
+
+  .brand-area-visuals {
+    margin-top: 0 !important;
+    align-self: start !important;
+  }
+
+  .brand-area-copy {
+    margin-top: -2px !important;
+    align-self: start !important;
+    padding-top: 0 !important;
+  }
+
+  .brand-area-copy .title {
+    font-size: clamp(62px, 5.2vw, 96px) !important;
+    line-height: .84 !important;
+    max-width: 8.8ch !important;
+  }
+
+  .brand-area-copy .body-copy {
+    max-width: 430px !important;
+    margin-top: 28px !important;
+  }
+
+  .brand-area-copy .btn-wa {
+    margin-top: 26px !important;
+  }
+}
+
+/* Desktop médio: evita que o título volte a empurrar demais os cards. */
+@media (min-width: 901px) and (max-width: 1220px) {
+  .brand-institutional .positioning-title {
+    font-size: clamp(64px, 7.1vw, 92px) !important;
+  }
+
+  .brand-area-copy .title {
+    font-size: clamp(54px, 6.2vw, 82px) !important;
+  }
+
+  .brand-area-split {
+    gap: 46px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 28 — TRACKING TÍTULO A EPICORE
+   ========================================================= */
+.brand-institutional .positioning-title {
+  letter-spacing: -0.012em !important;
+}
+
+.brand-institutional .positioning-title span {
+  letter-spacing: inherit !important;
+}
+
+
+/* =========================================================
+   ROUND 29 — CORREÇÃO ALINHAMENTO
+   ========================================================= */
+
+/* Prova social: no desktop o CTA volta para a coluna da esquerda,
+   alinhado ao vídeo/Amanda, conforme referência. */
+@media (min-width: 901px) {
+  .proof-cta-align {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr) !important;
+    gap: 16px !important;
+    align-items: start !important;
+  }
+
+  .proof-cta-align .btn-wa {
+    grid-column: 1 !important;
+    justify-self: start !important;
+  }
+}
+
+/* Fundadores: no mobile/tablet manter os dois cards lado a lado. */
+@media (max-width: 700px) {
+  .founders-section .founder-cards,
+  .founder-cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    align-items: start !important;
+  }
+
+  .founder-card {
+    border-radius: 24px !important;
+    min-width: 0 !important;
+  }
+
+  .founder-media img,
+  .founder-card img {
+    height: clamp(260px, 58vw, 390px) !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  .founder-info,
+  .founder-card-body {
+    padding: 18px 16px 18px !important;
+  }
+
+  .founder-info strong,
+  .founder-card h3 {
+    font-size: clamp(16px, 3.35vw, 20px) !important;
+    line-height: 1 !important;
+    margin-bottom: 7px !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .founder-info span,
+  .founder-card .role {
+    font-size: clamp(8.4px, 1.95vw, 10.5px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: .035em !important;
+    white-space: normal !important;
+    margin-bottom: 8px !important;
+  }
+
+  .founder-info p,
+  .founder-card-body p {
+    font-size: clamp(12px, 2.5vw, 15px) !important;
+    line-height: 1.28 !important;
+    margin-top: 6px !important;
+  }
+}
+
+/* Em telas muito estreitas, preserva o lado a lado sem quebrar a página. */
+@media (max-width: 430px) {
+  .founders-section .founder-cards,
+  .founder-cards {
+    gap: 10px !important;
+  }
+
+  .founder-info,
+  .founder-card-body {
+    padding: 14px 12px 15px !important;
+  }
+
+  .founder-media img,
+  .founder-card img {
+    height: clamp(220px, 64vw, 300px) !important;
+  }
+
+  .founder-info strong,
+  .founder-card h3 {
+    font-size: 15px !important;
+  }
+
+  .founder-info span,
+  .founder-card .role {
+    font-size: 7.6px !important;
+    letter-spacing: .025em !important;
+  }
+
+  .founder-info p,
+  .founder-card-body p {
+    font-size: 10.8px !important;
+  }
+}
+
+
+/* =========================================================
+   ROUND 30 — OBJEÇÕES SOMENTE NO CLIQUE
+   ========================================================= */
+.acc-item:hover .acc-content,
+.acc-item:focus-within .acc-content,
+.acc-item.is-hover-open .acc-content {
+  max-height: 0 !important;
+}
+
+.acc-item:hover {
+  background: rgba(255,255,255,.06) !important;
+}
+
+.acc-item.is-open .acc-content {
+  max-height: 460px !important;
+}
+
+</style>
+</head>
+<body class="noise">
+  <script>
+    window.EPICORE_ASSET_BASE = './assets/';
+  </script>
+
+  <div class="page" id="topo">
+    <header class="topbar" aria-label="Navegação principal">
+      <a href="#topo" aria-label="Epicore Arquitetura"><img class="topbar-logo" data-img="logos/epicore-logo-black.png" alt="Epicore" /></a>
+      <nav class="topbar-nav" aria-label="Seções">
+        <a href="#posicionamento">Posicionamento</a>
+        <a href="#portfolio">NOSSOS PROJETOS</a>
+        <a href="#processo">COMO TRABALHAMOS</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="btn btn-wa" href="#contato" data-whatsapp aria-label="Falar com a Epicore no WhatsApp">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.03 3.2A12.7 12.7 0 0 0 5.2 22.62L3.7 28.8l6.32-1.48A12.73 12.73 0 1 0 16.03 3.2Zm0 22.97c-2.05 0-3.96-.6-5.57-1.64l-.4-.25-3.73.88.9-3.63-.27-.42a10.28 10.28 0 1 1 9.07 5.06Zm5.64-7.7c-.31-.15-1.84-.9-2.13-1.01-.29-.1-.5-.15-.7.16-.2.3-.8 1-.98 1.2-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.26 9.26 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.52.1-.2.05-.39-.02-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 3 1.26 3.2c.16.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
+        CONVERSAR
+      </a>
+    </header>
+
+    <section class="hero invert" id="hero">
+      <div class="hero-media">
+        <div class="hero-bg-slides" id="heroBgSlides" aria-hidden="true">
+          <div class="hero-bg-slide is-active" data-bg="images/hero_motion/desktop/gif1.webp"></div>
+          <div class="hero-bg-slide" data-bg="images/hero_motion/desktop/gif2.webp"></div>
+          <div class="hero-bg-slide" data-bg="images/hero_motion/desktop/gif3.webp"></div>
+          <div class="hero-bg-slide" data-bg="images/hero_motion/desktop/gif4.webp"></div>
+          <div class="hero-bg-slide" data-bg="images/hero_motion/desktop/gif5.webp"></div>
+        </div>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-left" data-reveal>
+          <div class="hero-headspace" aria-hidden="true"></div>
+          <h1 class="hero-title"><span style="white-space:nowrap">Arquitetura estratégica</span><br><span style="white-space:nowrap">para negócios que</span><br><span style="white-space:nowrap">precisam se <span class="marker">destacar</span>.</span></h1>
+          <ul class="tags" aria-label="Tipos de projeto">
+            <li class="tag">Projetos comerciais</li>
+            <li class="tag">Ambientes corporativos</li>
+            <li class="tag">Stands e experiências de marca</li>
+          </ul>
+          <div>
+            <a class="btn btn-wa btn-wa-hero" href="#contato" data-whatsapp>
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.03 3.2A12.7 12.7 0 0 0 5.2 22.62L3.7 28.8l6.32-1.48A12.73 12.73 0 1 0 16.03 3.2Zm0 22.97c-2.05 0-3.96-.6-5.57-1.64l-.4-.25-3.73.88.9-3.63-.27-.42a10.28 10.28 0 1 1 9.07 5.06Zm5.64-7.7c-.31-.15-1.84-.9-2.13-1.01-.29-.1-.5-.15-.7.16-.2.3-.8 1-.98 1.2-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.26 9.26 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.52.1-.2.05-.39-.02-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 3 1.26 3.2c.16.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
+              QUERO TRANSFORMAR MEU ESPAÇO
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-motion hero-project-motion" data-reveal aria-label="Projetos Epicore em destaque">
+          <div class="project-motion-stack motion-desktop" aria-hidden="true">
+            <img data-img="images/hero_motion/desktop/gif1.webp" alt="" />
+            <img data-img="images/hero_motion/desktop/gif2.webp" alt="" />
+            <img data-img="images/hero_motion/desktop/gif3.webp" alt="" />
+            <img data-img="images/hero_motion/desktop/gif4.webp" alt="" />
+            <img data-img="images/hero_motion/desktop/gif5.webp" alt="" />
+            <img data-img="images/hero_motion/desktop/gif6.webp" alt="" />
+            <img data-img="images/hero_motion/desktop/gif7.webp" alt="" />
+          </div>
+          <div class="project-motion-stack motion-mobile" aria-hidden="true">
+            <img data-img="images/hero_motion/mobile/gifh1.webp" alt="" />
+            <img data-img="images/hero_motion/mobile/gifh2.webp" alt="" />
+            <img data-img="images/hero_motion/mobile/gifh3.webp" alt="" />
+            <img data-img="images/hero_motion/mobile/gifh4.webp" alt="" />
+            <img data-img="images/hero_motion/mobile/gifh5.webp" alt="" />
+            <img data-img="images/hero_motion/mobile/gifh6.webp" alt="" />
+            <img data-img="images/hero_motion/mobile/gifh7.webp" alt="" />
+          </div>
+        </aside>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-item">Comercial <i class="target-sep"></i> Corporativo <i class="target-sep"></i> Promocional <i class="target-sep"></i> Experiência <i class="target-sep"></i> Marca <i class="target-sep"></i></div>
+          <div class="marquee-item">Comercial <i class="target-sep"></i> Corporativo <i class="target-sep"></i> Promocional <i class="target-sep"></i> Experiência <i class="target-sep"></i> Marca <i class="target-sep"></i></div>
+        </div>
+      </div>
+
+          </section>
+<section class="section problem" id="problema">
+      <div class="container split">
+        <div class="big-question" data-reveal>
+          <h2 class="title tight-title">Seu espaço comunica o valor da sua marca?</h2>
+        </div>
+        <div class="problem-panel" data-reveal>
+          <p class="lead">Não adianta investir em marketing, equipe e operação se a estrutura não representa a qualidade do seu negócio.</p>
+          <ul class="problem-list">
+            <li><span>Clientes que não percebem valor;</span></li>
+            <li><span>Ambientes genéricos;</span></li>
+            <li><span>Marcas que parecem iguais à concorrência;</span></li>
+            <li><span>Oportunidades perdidas.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+<section class="section positioning invert brand-institutional" id="posicionamento">
+      <div class="container">
+        <div class="positioning-top" data-reveal>
+          <div>
+            <span class="eyebrow">A Epicore</span>
+            <h2 class="title positioning-title"><span style="white-space:nowrap">Projetamos</span><br><span style="white-space:nowrap">experiências que</span><br><span style="white-space:nowrap">fortalecem</span><br><span style="white-space:nowrap">marcas.</span></h2>
+          </div>
+          <p class="body-copy">Com sede em Tubarão - Santa Catarina, a Epicore desenvolve projetos comerciais, corporativos e promocionais para empresas de todo o Sul do Brasil. Liderada por arquitetos com mais de 10 anos de experiência, une estratégia, conceito e funcionalidade para transformar espaços em ativos de valor.</p>
+        </div>
+
+        <div class="brand-area-split" data-reveal>
+          <div class="brand-area-visuals">
+            <article class="area-card brand-area-card brand-area-green">
+              <img data-img="images/capas_segmentos/comercial.webp" alt="Arquitetura Comercial" />
+              <div class="area-content">
+                <h3>Arquitetura Comercial</h3>
+                <p>Espaços de venda desenhados para fortalecer posicionamento, experiência e percepção de valor.</p>
+              </div>
+            </article>
+            <article class="area-card brand-area-card brand-area-yellow">
+              <img data-img="images/capas_segmentos/corporativo.webp" alt="Ambientes Corporativos" />
+              <div class="area-content">
+                <h3>Ambientes Corporativos</h3>
+                <p>Projetos funcionais, expressivos e alinhados à cultura e aos objetivos do negócio.</p>
+              </div>
+            </article>
+            <article class="area-card brand-area-card brand-area-pink">
+              <img data-img="images/capas_segmentos/promocional.webp" alt="Stands e experiências de marca" />
+              <div class="area-content">
+                <h3>Stands e experiências de marca</h3>
+                <p>Ambientes promocionais que criam impacto, presença e memorização.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="brand-area-copy">
+            <span class="eyebrow">Áreas de atuação</span>
+            <h3 class="title"><span style="white-space:nowrap">Especialistas</span><br><span style="white-space:nowrap">em ambientes</span><br><span style="white-space:nowrap">de negócios.</span></h3>
+            <p class="body-copy">Projetos que unem estratégia, funcionalidade e identidade para transformar <strong>espaços que geram resultados.</strong></p>
+            <a class="btn btn-wa" href="#contato" data-whatsapp>
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.03 3.2A12.7 12.7 0 0 0 5.2 22.62L3.7 28.8l6.32-1.48A12.73 12.73 0 1 0 16.03 3.2Zm0 22.97c-2.05 0-3.96-.6-5.57-1.64l-.4-.25-3.73.88.9-3.63-.27-.42a10.28 10.28 0 1 1 9.07 5.06Zm5.64-7.7c-.31-.15-1.84-.9-2.13-1.01-.29-.1-.5-.15-.7.16-.2.3-.8 1-.98 1.2-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.26 9.26 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.52.1-.2.05-.39-.02-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 3 1.26 3.2c.16.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
+              FALE AGORA COM A EPICORE
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-marquee" aria-hidden="true">
+        <div class="brand-marquee-track">
+          <span>Arquitetura</span><i class="target-sep"></i><span>Branding</span><i class="target-sep"></i><span>Experiência</span><i class="target-sep"></i><span>Funcionalidade</span><i class="target-sep"></i><span>Posicionamento</span><i class="target-sep"></i><span>Percepção de valor</span><i class="target-sep"></i>
+          <span>Arquitetura</span><i class="target-sep"></i><span>Branding</span><i class="target-sep"></i><span>Experiência</span><i class="target-sep"></i><span>Funcionalidade</span><i class="target-sep"></i><span>Posicionamento</span><i class="target-sep"></i><span>Percepção de valor</span><i class="target-sep"></i>
+        </div>
+      </div>
+    </section>
+<section class="section founders-section" id="fundadores">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <span class="eyebrow">Fundadores</span>
+            <h2 class="title"><span style="white-space:nowrap">Conheça quem</span><br><span style="white-space:nowrap">transforma</span><br><span style="white-space:nowrap">estratégia em</span><br><span style="white-space:nowrap">arquitetura.</span></h2>
+          </div>
+          <p class="body-copy">À frente da Epicore, Alexandre e Ísis unem visão estratégica, domínio técnico e sensibilidade para construir espaços alinhados ao valor de cada marca.</p>
+        </div>
+
+        <div class="founder-cards" data-reveal>
+          <article class="founder-card">
+            <div class="founder-media"><img data-img="images/founders/founder-alexandre.webp" alt="Alexandre Felippe, arquiteto e cofundador da Epicore" /></div>
+            <div class="founder-info">
+              <strong>Alexandre Felippe</strong>
+              <span>Arquiteto e cofundador da Epicore.</span>
+              <p>Estratégia, conceito e coordenação de projetos.</p>
+            </div>
+          </article>
+          <article class="founder-card">
+            <div class="founder-media"><img data-img="images/founders/founder-isis.webp" alt="Ísis Bressan, arquiteta e cofundadora da Epicore" /></div>
+            <div class="founder-info">
+              <strong>Ísis Bressan</strong>
+              <span>Arquiteta e cofundadora da Epicore.</span>
+              <p>Coordenação de projetos executivos e obras.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+<section class="section portfolio invert" id="portfolio">
+      <div class="container">
+        <div class="section-head portfolio-head" data-reveal>
+          <div>
+            <span class="eyebrow portfolio-eyebrow">Portfólio</span>
+            <h2 class="title">Projetos que transformaram marcas em experiências.</h2>
+          </div>
+          <p class="body-copy">Conheça alguns ambientes desenvolvidos pela Epicore. Clique nos projetos para abrir a galeria completa.</p>
+        </div>
+
+        <div class="carousel-actions portfolio-actions-top" data-reveal>
+          <button class="round-btn" type="button" data-scroll="prev" aria-label="Projeto anterior">←</button>
+          <button class="round-btn" type="button" data-scroll="next" aria-label="Próximo projeto">→</button>
+        </div>
+
+        <div class="carousel-shell" data-reveal>
+          <div class="portfolio-track" id="portfolioTrack" aria-label="Carrossel de projetos">
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Suprimix Atacado" data-title="Suprimix Atacado" data-kind="Comercial" data-city="Tubarão/SC" data-description="Ambiente comercial orientado à experiência e à navegação do cliente." data-slides="images/portfolio_updated/suprimix/001.webp|images/portfolio_updated/suprimix/002.webp|images/portfolio_updated/suprimix/003.webp|images/portfolio_updated/suprimix/004.webp|images/portfolio_updated/suprimix/005.webp|images/portfolio_updated/suprimix/006.webp|images/portfolio_updated/suprimix/007.webp">
+              <figure><span class="project-tag tag-comercial">Comercial</span><img data-img="images/portfolio_updated/suprimix/001.webp" alt="Suprimix Atacado" /></figure>
+              <div class="project-meta"><small>Tubarão/SC</small><h3>Suprimix Atacado</h3><p>Ambiente comercial orientado à experiência e à navegação do cliente.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Virtual Haus" data-title="Virtual Haus" data-kind="Corporativo" data-city="São Bento do Sul/SC" data-description="Ambiente empresarial com personalidade, contraste e experiência." data-slides="images/portfolio_updated/virtual-haus/001.webp|images/portfolio_updated/virtual-haus/002.webp|images/portfolio_updated/virtual-haus/003.webp|images/portfolio_updated/virtual-haus/004.webp|images/portfolio_updated/virtual-haus/005.webp|images/portfolio_updated/virtual-haus/006.webp">
+              <figure><span class="project-tag tag-corporativo">Corporativo</span><img data-img="images/portfolio_updated/virtual-haus/001.webp" alt="Virtual Haus" /></figure>
+              <div class="project-meta"><small>São Bento do Sul/SC</small><h3>Virtual Haus</h3><p>Ambiente empresarial com personalidade, contraste e experiência.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Aurora" data-title="Aurora" data-kind="Promocional" data-city="Balneário Camboriú/SC" data-description="Stand desenhado para gerar impacto, permanência e lembrança de marca." data-slides="images/portfolio_updated/aurora/001.webp|images/portfolio_updated/aurora/002.webp">
+              <figure><span class="project-tag tag-promocional">Stand/Promocional</span><img data-img="images/portfolio_updated/aurora/001.webp" alt="Aurora" /></figure>
+              <div class="project-meta"><small>Balneário Camboriú/SC</small><h3>Aurora</h3><p>Stand desenhado para gerar impacto, permanência e lembrança de marca.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Casa das Fechaduras" data-title="Casa das Fechaduras" data-kind="Comercial" data-city="Tubarão/SC" data-description="Fachada e presença de varejo com leitura forte de marca." data-slides="images/portfolio_updated/casa-das-fechaduras/001.webp|images/portfolio_updated/casa-das-fechaduras/002.webp|images/portfolio_updated/casa-das-fechaduras/003.webp|images/portfolio_updated/casa-das-fechaduras/004.webp|images/portfolio_updated/casa-das-fechaduras/005.webp|images/portfolio_updated/casa-das-fechaduras/006.webp|images/portfolio_updated/casa-das-fechaduras/007.webp">
+              <figure><span class="project-tag tag-comercial">Comercial</span><img data-img="images/portfolio_updated/casa-das-fechaduras/001.webp" alt="Casa das Fechaduras" /></figure>
+              <div class="project-meta"><small>Tubarão/SC</small><h3>Casa das Fechaduras</h3><p>Fachada e presença de varejo com leitura forte de marca.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Laje 4" data-title="Laje 4" data-kind="Corporativo" data-city="Tubarão/SC" data-description="Fachada corporativa com presença arquitetônica e posicionamento." data-slides="images/portfolio_updated/laje-4/001.webp|images/portfolio_updated/laje-4/002.webp">
+              <figure><span class="project-tag tag-corporativo">Corporativo</span><img data-img="images/portfolio_updated/laje-4/001.webp" alt="Laje 4" /></figure>
+              <div class="project-meta"><small>Tubarão/SC</small><h3>Laje 4</h3><p>Fachada corporativa com presença arquitetônica e posicionamento.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Lumie Solar" data-title="Lumie Solar" data-kind="Promocional" data-city="Criciúma/SC" data-description="Ativação com linguagem arquitetônica forte, imersiva e fora do comum." data-slides="images/portfolio_updated/lumie-solar/001.webp|images/portfolio_updated/lumie-solar/002.webp|images/portfolio_updated/lumie-solar/003.webp|images/portfolio_updated/lumie-solar/004.webp">
+              <figure><span class="project-tag tag-promocional">Stand/Promocional</span><img data-img="images/portfolio_updated/lumie-solar/001.webp" alt="Lumie Solar" /></figure>
+              <div class="project-meta"><small>Criciúma/SC</small><h3>Lumie Solar</h3><p>Ativação com linguagem arquitetônica forte, imersiva e fora do comum.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Farmácia" data-title="Farmácia" data-kind="Comercial" data-city="Tubarão/SC" data-description="Layout de varejo pensado para clareza, jornada e percepção de cuidado." data-slides="images/portfolio_updated/farmacia/001.webp|images/portfolio_updated/farmacia/002.webp|images/portfolio_updated/farmacia/003.webp">
+              <figure><span class="project-tag tag-comercial">Comercial</span><img data-img="images/portfolio_updated/farmacia/001.webp" alt="Farmácia" /></figure>
+              <div class="project-meta"><small>Tubarão/SC</small><h3>Farmácia</h3><p>Layout de varejo pensado para clareza, jornada e percepção de cuidado.</p></div>
+            </article>
+            <article class="project-card project-card-modal" tabindex="0" role="button" aria-label="Abrir galeria do projeto Pipocas Felippe" data-title="Pipocas Felippe" data-kind="Comercial" data-city="Pedras Grandes/SC" data-description="Espaço lúdico, memorável e alinhado ao universo da marca." data-slides="images/portfolio_updated/pipocas-felippe/001.webp|images/portfolio_updated/pipocas-felippe/002.webp|images/portfolio_updated/pipocas-felippe/003.webp|images/portfolio_updated/pipocas-felippe/004.webp">
+              <figure><span class="project-tag tag-comercial">Comercial</span><img data-img="images/portfolio_updated/pipocas-felippe/001.webp" alt="Pipocas Felippe" /></figure>
+              <div class="project-meta"><small>Pedras Grandes/SC</small><h3>Pipocas Felippe</h3><p>Espaço lúdico, memorável e alinhado ao universo da marca.</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+<section class="section proof" id="prova-social">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <span class="eyebrow">Prova social</span>
+            <h2 class="title proof-title">A confiança de quem escolheu fazer <span class="different-word">diferente</span>.</h2>
+          </div>
+          <p class="body-copy">Veja o relato de empresas que transformaram seus negócios por meio de projetos desenvolvidos pela Epicore.</p>
+        </div>
+
+        <div class="proof-grid" data-reveal>
+          <article class="video-proof no-outline">
+            <video controls playsinline preload="metadata" data-video="videos/depoimento-horizontal.mp4" poster="images/depoimento-horizontal-poster.webp" id="videoAmanda">
+              Seu navegador não suporta reprodução de vídeo.
+            </video>
+            <div class="proof-caption">
+              <div class="person-line"><img data-img="images/depoimentos/depo-amanda.png" alt="Amanda Tartari" /><div><strong>Amanda Tartari</strong><span>Casa das Fechaduras • Tubarão/SC</span></div></div>
+              <small>Depoimento em vídeo</small>
+            </div>
+          </article>
+
+          <div class="quotes">
+            <article class="quote-card marlon-card">
+              <div class="person-line"><img data-img="images/depoimentos/depo-marlon.png" alt="Marlon Campos" /><div><strong>Marlon Campos</strong><span>Suprimix | Atacado e Varejo</span></div></div>
+              <p>“Antes de conhecer a EPICORE, estávamos inseguros para iniciar nosso projeto por experiências anteriores que não tinham sido positivas. Desde o primeiro contato, sentimos a diferença no atendimento, na atenção e no cuidado com cada detalhe. Alexandre e Ísis estiveram sempre presentes, esclarecendo dúvidas e trazendo tranquilidade para cada decisão. O resultado final superou nossas expectativas, e hoje só temos gratidão pelo profissionalismo e por todo o suporte recebido. Foi uma excelente experiência do início ao fim.”</p>
+            </article>
+            <article class="quote-card">
+              <div class="person-line"><img data-img="images/depoimentos/depo-beatriz.png" alt="Beatriz Alquini" /><div><strong>Beatriz Alquini</strong><span>Agência Alquini</span></div></div>
+              <p>“Nunca vou esquecer a sensação de ver o primeiro projeto apresentado. No momento em que foi apresentado, tive a certeza absoluta de que tínhamos feito a melhor escolha possível. Pela primeira vez, consegui enxergar o branding da nossa agência acontecendo em um espaço físico e isso foi uma das coisas mais simbólicas e especiais que um arquiteto poderia traduzir.”</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="proof-cta-align" data-reveal>
+          <a class="btn btn-wa" href="#contato" data-whatsapp>
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.03 3.2A12.7 12.7 0 0 0 5.2 22.62L3.7 28.8l6.32-1.48A12.73 12.73 0 1 0 16.03 3.2Zm0 22.97c-2.05 0-3.96-.6-5.57-1.64l-.4-.25-3.73.88.9-3.63-.27-.42a10.28 10.28 0 1 1 9.07 5.06Zm5.64-7.7c-.31-.15-1.84-.9-2.13-1.01-.29-.1-.5-.15-.7.16-.2.3-.8 1-.98 1.2-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.26 9.26 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.52.1-.2.05-.39-.02-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 3 1.26 3.2c.16.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
+            CONVERSAR COM A EPICORE
+          </a>
+        </div>
+      </div>
+    </section>
+<section class="section process" id="processo">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <span class="eyebrow process-eyebrow">Entenda o processo</span>
+            <h2 class="title"><span style="white-space:nowrap">Da estratégia</span><br><span style="white-space:nowrap">à transformação.</span></h2>
+          </div>
+          <p class="body-copy">Esse é o jeito Epicore de trabalhar: processos claros e colaborativos, conduzindo cada projeto com coerência, precisão e propósito.</p>
+        </div>
+
+        <div class="timeline-horizontal" data-reveal aria-label="Timeline do processo Epicore">
+          <article class="timeline-card" style="--step-color:#0870ee">
+            <span>01</span>
+            <h3>Imersão</h3>
+            <p>Entendemos a marca, o público, a operação e os objetivos do negócio.</p>
+          </article>
+          <article class="timeline-card" style="--step-color:#ec559a">
+            <span>02</span>
+            <h3>Estratégia</h3>
+            <p>Definimos conceito, experiência e direcionamento para o espaço.</p>
+          </article>
+          <article class="timeline-card" style="--step-color:#ffd928">
+            <span>03</span>
+            <h3>Projeto</h3>
+            <p>Transformamos a estratégia em um ambiente fora do óbvio, com função e presença.</p>
+          </article>
+          <article class="timeline-card" style="--step-color:#51c535">
+            <span>04</span>
+            <h3>Detalhamento</h3>
+            <p>Preparamos as definições técnicas para a execução acontecer com segurança.</p>
+          </article>
+          <article class="timeline-card" style="--step-color:#ed6c1e">
+            <span>05</span>
+            <h3>Acompanhamento</h3>
+            <p>Garantimos fidelidade entre conceito e resultado, do início ao fim.</p>
+          </article>
+        </div>
+
+        <div style="margin-top:28px" data-reveal>
+          <a class="btn btn-wa" href="#contato" data-whatsapp>
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.03 3.2A12.7 12.7 0 0 0 5.2 22.62L3.7 28.8l6.32-1.48A12.73 12.73 0 1 0 16.03 3.2Zm0 22.97c-2.05 0-3.96-.6-5.57-1.64l-.4-.25-3.73.88.9-3.63-.27-.42a10.28 10.28 0 1 1 9.07 5.06Zm5.64-7.7c-.31-.15-1.84-.9-2.13-1.01-.29-.1-.5-.15-.7.16-.2.3-.8 1-.98 1.2-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.26 9.26 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.52.1-.2.05-.39-.02-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 3 1.26 3.2c.16.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
+            QUERO DAR O PRIMEIRO PASSO
+          </a>
+        </div>
+      </div>
+    </section>
+<section class="section objections invert" id="objecoes">
+      <div class="container">
+        <div class="objection-grid objection-grid-simple">
+          <div class="section-head objection-heading" data-reveal>
+            <div>
+              <h2 class="title">Talvez você esteja pensando exatamente isso...</h2>
+            </div>
+          </div>
+
+          <div class="accordion" data-reveal>
+          <article class="acc-item is-open">
+            <button class="acc-trigger" type="button"><span>“Tenho medo de investir e não perceber retorno.”</span><strong>+</strong></button>
+            <div class="acc-content"><p>Quanto custa continuar transmitindo uma imagem que não representa a qualidade do que você entrega? Todos os dias, clientes formam percepções sobre sua marca antes mesmo da primeira conversa. Um ambiente bem planejado ajuda a fortalecer essa percepção e gerar mais valor para o negócio.</p></div>
+          </article>
+          <article class="acc-item">
+            <button class="acc-trigger" type="button"><span>“Meu negócio ainda não é grande o suficiente.”</span><strong>+</strong></button>
+            <div class="acc-content"><p>Grandes marcas não investem em arquitetura porque cresceram. Muitas cresceram porque investiram na forma como eram percebidas.</p></div>
+          </article>
+          <article class="acc-item">
+            <button class="acc-trigger" type="button"><span>“Será que realmente faz diferença?”</span><strong>+</strong></button>
+            <div class="acc-content"><p>O ambiente é uma das primeiras experiências que clientes, parceiros e colaboradores têm com sua marca.</p></div>
+          </article>
+          <article class="acc-item">
+            <button class="acc-trigger" type="button"><span>“Não quero dor de cabeça com obra.”</span><strong>+</strong></button>
+            <div class="acc-content"><p>Temos processos claros e planejamos tudo para, justamente, reduzir imprevistos.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+<section class="section form-section" id="contato">
+      <div class="container form-wrap form-wrap-clean">
+        <div class="side-claim" data-reveal>
+          <div>
+            <span class="eyebrow contact-eyebrow">Contato</span>
+            <h2 class="title">Vamos transformar seu espaço em uma experiência de marca?</h2>
+            <p class="lead" style="margin-top:18px">Preencha o formulário e converse com a equipe Epicore sobre seu projeto.</p>
+          </div>
+        </div>
+
+        <form class="form-box" id="leadForm" data-reveal>
+          <div class="field"><label for="nome">Nome *</label><input id="nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome" /></div>
+          <div class="field"><label for="empresa">Empresa</label><input id="empresa" name="empresa" type="text" autocomplete="organization" placeholder="Nome da empresa" /></div>
+          <div class="field"><label for="email">E-mail *</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="seu@email.com" /></div>
+          <div class="field"><label for="telefone">Telefone *</label><input id="telefone" name="telefone" type="tel" autocomplete="tel" required placeholder="(__) _____-____" /></div>
+          <div class="field"><label for="tipo">Tipo de projeto *</label><select id="tipo" name="tipo" required><option value="" selected disabled>Selecione uma opção</option><option>Comercial</option><option>Corporativo</option><option>Stand/Promocional</option><option>Outros</option></select></div>
+          <button class="btn btn-wa" type="submit" style="width:100%;margin-top:8px">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.03 3.2A12.7 12.7 0 0 0 5.2 22.62L3.7 28.8l6.32-1.48A12.73 12.73 0 1 0 16.03 3.2Zm0 22.97c-2.05 0-3.96-.6-5.57-1.64l-.4-.25-3.73.88.9-3.63-.27-.42a10.28 10.28 0 1 1 9.07 5.06Zm5.64-7.7c-.31-.15-1.84-.9-2.13-1.01-.29-.1-.5-.15-.7.16-.2.3-.8 1-.98 1.2-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.26 9.26 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.52.1-.2.05-.39-.02-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 3 1.26 3.2c.16.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
+            INICIAR CONVERSA
+          </button>
+          <p class="form-note">*Campo obrigatório</p>
+        </form>
+      </div>
+    </section>
+<section class="section explore" id="instagram">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <span class="eyebrow">Explore</span>
+            <h2 class="title">Acompanhe a Epicore além dos projetos.</h2>
+          </div>
+          <p class="body-copy">Inspirações, projetos, bastidores e ideias que refletem a forma Epicore de pensar arquitetura para negócios.</p>
+        </div>
+
+        <div class="feed-grid" data-reveal>
+          <a class="feed-tile" href="https://www.instagram.com/p/DX5I87OgNs9/" target="_blank" rel="noopener"><img data-img="images/instagram_post/001.webp" alt="Publicação Epicore no Instagram" /></a>
+          <a class="feed-tile" href="https://www.instagram.com/reel/DXxWj6KikRe/" target="_blank" rel="noopener"><img data-img="images/instagram_post/002.webp" alt="Publicação Epicore no Instagram" /></a>
+          <a class="feed-tile" href="https://www.instagram.com/p/DXnDlblgOfB/" target="_blank" rel="noopener"><img data-img="images/instagram_post/003.webp" alt="Publicação Epicore no Instagram" /></a>
+          <a class="feed-tile" href="https://www.instagram.com/p/DXctRaKFAb8/" target="_blank" rel="noopener"><img data-img="images/instagram_post/004.webp" alt="Publicação Epicore no Instagram" /></a>
+          <a class="feed-tile" href="https://www.instagram.com/reel/DXU_O1tAhR1/" target="_blank" rel="noopener"><img data-img="images/instagram_post/005.webp" alt="Publicação Epicore no Instagram" /></a>
+        </div>
+
+        <div style="margin-top:30px" data-reveal>
+          <a class="btn btn-instagram" href="https://www.instagram.com/epicorearquitetura/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8A4.2 4.2 0 1 1 7.8 12 4.2 4.2 0 0 1 12 7.8Zm0 2A2.2 2.2 0 1 0 14.2 12 2.2 2.2 0 0 0 12 9.8Zm4.75-3.05a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z"/></svg>
+            Visitar Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="project-lightbox" id="projectLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galeria de projeto">
+      <div class="project-lightbox-backdrop" data-lightbox-close></div>
+      <div class="project-lightbox-panel">
+        <button class="project-lightbox-close" type="button" data-lightbox-close aria-label="Fechar galeria">×</button>
+        <div class="project-lightbox-head">
+          <span id="lightboxKind"></span>
+          <h3 id="lightboxTitle"></h3>
+          <p id="lightboxMeta"></p>
+        </div>
+        <div class="project-lightbox-gallery" id="lightboxGallery"></div>
+        <p class="project-lightbox-desc" id="lightboxDesc"></p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <img class="footer-logo" data-img="logos/epicore-logo-white.png" alt="Epicore" />
+        <p>Epicore Arquitetura® | Tubarão - Santa Catarina | CNPJ: 58.264.262/0001-43</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const base = (window.EPICORE_ASSET_BASE || './assets/').replace(/\/$/, '') + '/';
+
+      document.querySelectorAll('[data-img]').forEach(el => {
+        el.src = base + el.getAttribute('data-img');
+      });
+
+      document.querySelectorAll('[data-video]').forEach(el => {
+        el.src = base + el.getAttribute('data-video');
+        el.load();
+      });
+
+      document.querySelectorAll('[data-bg]').forEach(el => {
+        el.style.backgroundImage = `url('${base + el.getAttribute('data-bg')}')`;
+      });
+
+      const videoAmanda = document.getElementById('videoAmanda');
+      if (videoAmanda) {
+        videoAmanda.poster = base + 'images/depoimento-horizontal-poster.webp';
+      }
+
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach(el => observer.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('is-visible'));
+      }      const heroSlides = Array.from(document.querySelectorAll('#heroBgSlides .hero-bg-slide'));
+      let heroIndex = 0;
+      const activateHeroSlide = (index) => {
+        heroSlides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      };
+      if (heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setInterval(() => {
+          heroIndex = (heroIndex + 1) % heroSlides.length;
+          activateHeroSlide(heroIndex);
+        }, 3600);
+      }
+
+      const track = document.getElementById('portfolioTrack');
+      document.querySelectorAll('[data-scroll]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const dir = btn.getAttribute('data-scroll') === 'next' ? 1 : -1;
+          track.scrollBy({ left: dir * Math.min(window.innerWidth * .76, 740), behavior: 'smooth' });
+        });
+      });
+
+      document.querySelectorAll('.project-card[data-slides]').forEach(card => {
+        const img = card.querySelector('img');
+        const slides = (card.dataset.slides || '').split('|').map(item => item.trim()).filter(Boolean);
+        if (!img || slides.length < 2) return;
+        slides.forEach(path => { const preload = new Image(); preload.src = base + path; });
+        let current = 0;
+        let timer = null;
+        const showSlide = (index) => {
+          current = index;
+          img.src = base + slides[current];
+        };
+        const startSlideshow = () => {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || timer) return;
+          timer = window.setInterval(() => {
+            showSlide((current + 1) % slides.length);
+          }, 1150);
+        };
+        const stopSlideshow = () => {
+          if (timer) {
+            window.clearInterval(timer);
+            timer = null;
+          }
+          showSlide(0);
+        };
+        card.addEventListener('mouseenter', startSlideshow);
+        card.addEventListener('mouseleave', stopSlideshow);
+        card.addEventListener('focusin', startSlideshow);
+        card.addEventListener('focusout', stopSlideshow);
+      });
+
+
+      const lightbox = document.getElementById('projectLightbox');
+      const lightboxGallery = document.getElementById('lightboxGallery');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxKind = document.getElementById('lightboxKind');
+      const lightboxMeta = document.getElementById('lightboxMeta');
+      const lightboxDesc = document.getElementById('lightboxDesc');
+      const closeLightbox = () => {
+        if (!lightbox) return;
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      const openLightbox = (card) => {
+        if (!lightbox || !lightboxGallery) return;
+        const slides = (card.dataset.slides || '').split('|').map(item => item.trim()).filter(Boolean);
+        lightboxTitle.textContent = card.dataset.title || '';
+        lightboxKind.textContent = card.dataset.kind || '';
+        lightboxMeta.textContent = card.dataset.city || '';
+        lightboxDesc.textContent = card.dataset.description || '';
+        lightboxGallery.innerHTML = slides.map((path, index) => `<img src="${base + path}" alt="${card.dataset.title || 'Projeto Epicore'} — imagem ${index + 1}" loading="lazy">`).join('');
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      document.querySelectorAll('.project-card-modal').forEach(card => {
+        card.addEventListener('click', () => openLightbox(card));
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLightbox(card);
+          }
+        });
+      });
+      document.querySelectorAll('[data-lightbox-close]').forEach(btn => btn.addEventListener('click', closeLightbox));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeLightbox();
+      });
+
+      document.querySelectorAll('.acc-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const item = trigger.closest('.acc-item');
+          const open = item.classList.contains('is-open');
+          document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('is-open'));
+          if (!open) item.classList.add('is-open');
+        });
+      });
+
+
+      /* MOBILE FORCE PATCH — aplica também via JS para contornar CSS/preview/caches */
+      const applyEpicoreMobileForce = () => {
+        const isMobileLike = window.matchMedia('(max-width: 1100px)').matches;
+        document.body.classList.toggle('epicore-mobile-force', isMobileLike);
+
+        const helperCard = document.querySelector('.proof .quotes > .quote-card.is-highlight');
+        const beatrizCard = document.querySelector('.proof .quotes > .quote-card:not(.is-highlight)');
+        const proofGrid = document.querySelector('.proof .proof-grid');
+        const quotes = document.querySelector('.proof .quotes');
+
+        if (proofGrid) {
+          proofGrid.style.setProperty('grid-template-columns', isMobileLike ? '1fr' : '', isMobileLike ? 'important' : '');
+          proofGrid.style.setProperty('gap', isMobileLike ? '14px' : '', isMobileLike ? 'important' : '');
+        }
+        if (quotes) {
+          quotes.style.setProperty('display', isMobileLike ? 'grid' : '', isMobileLike ? 'important' : '');
+          quotes.style.setProperty('grid-template-columns', isMobileLike ? '1fr' : '', isMobileLike ? 'important' : '');
+          quotes.style.setProperty('gap', isMobileLike ? '14px' : '', isMobileLike ? 'important' : '');
+        }
+        if (helperCard) {
+          helperCard.style.setProperty('display', isMobileLike ? 'none' : '', isMobileLike ? 'important' : '');
+          helperCard.setAttribute('aria-hidden', isMobileLike ? 'true' : 'false');
+        }
+        if (beatrizCard) {
+          beatrizCard.style.setProperty('display', isMobileLike ? 'flex' : '', isMobileLike ? 'important' : '');
+        }
+
+        document.querySelectorAll('.process .step').forEach(step => {
+          const num = step.querySelector('.step-num');
+          const title = step.querySelector('h3');
+          const desc = step.querySelector('p');
+
+          step.style.setProperty('display', isMobileLike ? 'grid' : '', isMobileLike ? 'important' : '');
+          step.style.setProperty('grid-template-columns', isMobileLike ? '38px minmax(0, 1fr)' : '', isMobileLike ? 'important' : '');
+          step.style.setProperty('column-gap', isMobileLike ? '10px' : '', isMobileLike ? 'important' : '');
+          step.style.setProperty('row-gap', isMobileLike ? '2px' : '', isMobileLike ? 'important' : '');
+          step.style.setProperty('align-items', isMobileLike ? 'start' : '', isMobileLike ? 'important' : '');
+          step.style.setProperty('padding', isMobileLike ? '20px 0' : '', isMobileLike ? 'important' : '');
+
+          if (num) {
+            num.style.setProperty('grid-column', isMobileLike ? '1' : '', isMobileLike ? 'important' : '');
+            num.style.setProperty('grid-row', isMobileLike ? '1 / span 2' : '', isMobileLike ? 'important' : '');
+            num.style.setProperty('font-size', isMobileLike ? '32px' : '', isMobileLike ? 'important' : '');
+            num.style.setProperty('line-height', isMobileLike ? '.82' : '', isMobileLike ? 'important' : '');
+            num.style.setProperty('margin', isMobileLike ? '0' : '', isMobileLike ? 'important' : '');
+          }
+          if (title) {
+            title.style.setProperty('grid-column', isMobileLike ? '2' : '', isMobileLike ? 'important' : '');
+            title.style.setProperty('grid-row', isMobileLike ? '1' : '', isMobileLike ? 'important' : '');
+            title.style.setProperty('font-size', isMobileLike ? '22px' : '', isMobileLike ? 'important' : '');
+            title.style.setProperty('line-height', isMobileLike ? '1' : '', isMobileLike ? 'important' : '');
+            title.style.setProperty('margin', isMobileLike ? '0 0 3px' : '', isMobileLike ? 'important' : '');
+          }
+          if (desc) {
+            desc.style.setProperty('grid-column', isMobileLike ? '2' : '', isMobileLike ? 'important' : '');
+            desc.style.setProperty('grid-row', isMobileLike ? '2' : '', isMobileLike ? 'important' : '');
+            desc.style.setProperty('font-size', isMobileLike ? '16px' : '', isMobileLike ? 'important' : '');
+            desc.style.setProperty('line-height', isMobileLike ? '1.34' : '', isMobileLike ? 'important' : '');
+            desc.style.setProperty('margin', isMobileLike ? '0' : '', isMobileLike ? 'important' : '');
+          }
+        });
+
+        const formWrap = document.querySelector('.form-section .form-wrap');
+        const sideClaim = document.querySelector('.form-section .side-claim');
+        const sideClaimText = sideClaim ? sideClaim.querySelector(':scope > div:first-child') : null;
+        const formBox = document.querySelector('.form-section .form-box');
+        const contactMotion = document.querySelector('.form-section .contact-motion');
+
+        if (formWrap && sideClaim && formBox && contactMotion) {
+          if (!contactMotion.dataset.originalParent) {
+            contactMotion.dataset.originalParent = 'side-claim';
+          }
+
+          if (isMobileLike) {
+            if (contactMotion.parentElement !== formWrap) {
+              formWrap.appendChild(contactMotion);
+            }
+            formWrap.style.setProperty('display', 'flex', 'important');
+            formWrap.style.setProperty('flex-direction', 'column', 'important');
+            formWrap.style.setProperty('align-items', 'stretch', 'important');
+            formWrap.style.setProperty('gap', '22px', 'important');
+            sideClaim.style.setProperty('display', 'contents', 'important');
+            if (sideClaimText) sideClaimText.style.setProperty('order', '1', 'important');
+            formBox.style.setProperty('order', '2', 'important');
+            formBox.style.setProperty('width', '100%', 'important');
+            contactMotion.style.setProperty('order', '3', 'important');
+            contactMotion.style.setProperty('width', 'min(320px, 82vw)', 'important');
+            contactMotion.style.setProperty('margin', '8px auto -1px', 'important');
+          } else {
+            if (contactMotion.parentElement !== sideClaim) {
+              sideClaim.appendChild(contactMotion);
+            }
+            [formWrap, sideClaim, sideClaimText, formBox, contactMotion].forEach(el => {
+              if (!el) return;
+              ['display','flex-direction','align-items','gap','order','width','margin'].forEach(prop => el.style.removeProperty(prop));
+            });
+          }
+        }
+
+        const positioningBody = document.querySelector('.positioning .positioning-body');
+        const positioningClaim = document.querySelector('.positioning .positioning-claim');
+        const positioningLast = positioningClaim ? positioningClaim.querySelector(':scope > div:last-child') : null;
+        const wordMap = document.querySelector('.positioning .word-map');
+
+        if (positioningBody) {
+          positioningBody.style.setProperty('margin-top', isMobileLike ? '20px' : '', isMobileLike ? 'important' : '');
+          positioningBody.style.setProperty('gap', isMobileLike ? '14px' : '', isMobileLike ? 'important' : '');
+        }
+        if (positioningClaim) {
+          positioningClaim.style.setProperty('min-height', isMobileLike ? 'auto' : '', isMobileLike ? 'important' : '');
+          positioningClaim.style.setProperty('gap', isMobileLike ? '10px' : '', isMobileLike ? 'important' : '');
+        }
+        if (positioningLast) {
+          positioningLast.style.setProperty('margin-top', isMobileLike ? '0' : '', isMobileLike ? 'important' : '');
+        }
+        if (wordMap) {
+          wordMap.style.setProperty('margin-top', isMobileLike ? '14px' : '', isMobileLike ? 'important' : '');
+        }
+      };
+
+      applyEpicoreMobileForce();
+      window.addEventListener('resize', applyEpicoreMobileForce);
+      window.addEventListener('orientationchange', applyEpicoreMobileForce);
+
+      const waBase = 'https://wa.me/554891799988?text=';
+      const defaultMsg = 'Olá! Estou buscando uma solução de arquitetura para meu negócio e gostaria de conversar com vocês.';
+      const form = document.getElementById('leadForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const msg = `${defaultMsg}\n\nNome: ${data.get('nome')}\nEmpresa: ${data.get('empresa') || 'Não informado'}\nE-mail: ${data.get('email')}\nTelefone: ${data.get('telefone')}\nTipo de projeto: ${data.get('tipo')}`;
+        window.location.href = waBase + encodeURIComponent(msg);
+      });
+    })();
+  
+
+
+
+
+
+
+
+/* ROUND 19 — foto abre álbum, parte de texto arrasta */
+(function () {
+  const base = (window.EPICORE_ASSET_BASE || './assets/').replace(/\/$/, '') + '/';
+
+  function asset(path) {
+    if (!path) return '';
+    if (/^(https?:|data:|blob:)/i.test(path)) return path;
+    return base + path.replace(/^\.?\/*/, '');
+  }
+
+  const track = document.getElementById('portfolioTrack');
+  const lightbox = document.getElementById('projectLightbox');
+  const lightboxGallery = document.getElementById('lightboxGallery');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxKind = document.getElementById('lightboxKind');
+  const lightboxMeta = document.getElementById('lightboxMeta');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+
+  function closeAlbum() {
+    if (!lightbox) return;
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function openAlbum(card) {
+    if (!card || !lightbox || !lightboxGallery) return;
+
+    const title = card.dataset.title || card.querySelector('.project-meta h3')?.textContent?.trim() || 'Projeto Epicore';
+    const kind = card.dataset.kind || card.querySelector('.project-tag')?.textContent?.trim() || '';
+    const city = card.dataset.city || card.querySelector('.project-meta small')?.textContent?.trim() || '';
+    const desc = card.dataset.description || card.querySelector('.project-meta p')?.textContent?.trim() || '';
+
+    const slides = (card.dataset.slides || '')
+      .split('|')
+      .map(item => item.trim())
+      .filter(Boolean);
+
+    const fallbackImg = card.querySelector('img')?.getAttribute('data-img') || card.querySelector('img')?.getAttribute('src') || '';
+    const album = slides.length ? slides : (fallbackImg ? [fallbackImg] : []);
+
+    if (lightboxTitle) lightboxTitle.textContent = title;
+    if (lightboxKind) lightboxKind.textContent = kind;
+    if (lightboxMeta) lightboxMeta.textContent = city;
+    if (lightboxDesc) lightboxDesc.textContent = desc;
+
+    lightboxGallery.innerHTML = album.map((path, index) => {
+      return `<img src="${asset(path)}" alt="${title} — imagem ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}">`;
+    }).join('');
+
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Fechamento do álbum
+  document.querySelectorAll('[data-lightbox-close]').forEach(btn => {
+    if (btn.dataset.round19CloseReady) return;
+    btn.dataset.round19CloseReady = 'true';
+    btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeAlbum();
+    }, true);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeAlbum();
+  });
+
+  // Clique NA FOTO abre o popup/álbum
+  document.querySelectorAll('.project-card-modal figure').forEach(figure => {
+    if (figure.dataset.round19FigureReady) return;
+    figure.dataset.round19FigureReady = 'true';
+
+    figure.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      openAlbum(figure.closest('.project-card-modal'));
+    }, true);
+  });
+
+  // Clique simples na parte de baixo NÃO abre popup.
+  // Arraste na parte de baixo movimenta o carrossel.
+  if (track && !track.dataset.round19MetaDragReady) {
+    track.dataset.round19MetaDragReady = 'true';
+
+    let isDragging = false;
+    let startX = 0;
+    let startScroll = 0;
+    let moved = false;
+
+    const finishDrag = function (event) {
+      if (!isDragging) return;
+      isDragging = false;
+      track.classList.remove('is-dragging');
+      try { track.releasePointerCapture(event.pointerId); } catch (e) {}
+      window.setTimeout(() => { moved = false; }, 80);
+    };
+
+    track.querySelectorAll('.project-meta').forEach(meta => {
+      meta.addEventListener('pointerdown', function (event) {
+        if (event.button !== undefined && event.button !== 0) return;
+        isDragging = true;
+        moved = false;
+        startX = event.clientX;
+        startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+        try { track.setPointerCapture(event.pointerId); } catch (e) {}
+      });
+
+      meta.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }, true);
+    });
+
+    track.addEventListener('pointermove', function (event) {
+      if (!isDragging) return;
+      const dx = event.clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = startScroll - dx;
+    });
+
+    track.addEventListener('pointerup', finishDrag);
+    track.addEventListener('pointercancel', finishDrag);
+    track.addEventListener('mouseleave', finishDrag);
+  }
+
+  // Bloqueia abertura por clique no card inteiro vinda de scripts antigos.
+  // A exceção é a figura, que já abre no handler acima.
+  document.querySelectorAll('.project-card-modal').forEach(card => {
+    if (card.dataset.round19CardGuardReady) return;
+    card.dataset.round19CardGuardReady = 'true';
+
+    card.addEventListener('click', function (event) {
+      if (event.target.closest('figure')) return;
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }, true);
+
+    card.addEventListener('keydown', function (event) {
+      if ((event.key === 'Enter' || event.key === ' ') && document.activeElement === card) {
+        event.preventDefault();
+        openAlbum(card);
+      }
+    });
+  });
+
+  // Máscara de telefone mantida
+  const phoneInputs = document.querySelectorAll('input[type="tel"], input[name*="telefone" i], input[id*="telefone" i], input[name*="phone" i], input[id*="phone" i]');
+  const applyPhoneMask = (input) => {
+    const digits = input.value.replace(/\D/g, '').slice(0, 11);
+    let formatted = '';
+    if (digits.length > 0) formatted = '(' + digits.slice(0, 2);
+    if (digits.length >= 2) formatted += ') ';
+    if (digits.length > 2) formatted += digits.slice(2, 7);
+    if (digits.length > 7) formatted += '-' + digits.slice(7, 11);
+    input.value = formatted;
+  };
+
+  phoneInputs.forEach((input) => {
+    input.setAttribute('inputmode', 'numeric');
+    input.setAttribute('autocomplete', 'tel');
+    input.setAttribute('placeholder', '(__) _____-____');
+    input.addEventListener('input', () => applyPhoneMask(input));
+    input.addEventListener('blur', () => applyPhoneMask(input));
+  });
+})();
+
+
+
+
+
+/* ROUND 30 — remove abertura por hover nas objeções */
+(function () {
+  document.querySelectorAll('.acc-item').forEach((item) => {
+    item.classList.remove('is-hover-open');
+    item.onmouseenter = null;
+    item.onmouseleave = null;
+  });
+})();
+
+</script>
+</body>
+</html>
